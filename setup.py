@@ -68,10 +68,10 @@ if not cdrom.has_python_h():
     ext_modules = [ ]
     
 setup (module      = 'metadata',
-       version     = '0.7.3',
+       version     = '0.7.4',
        license     = 'GPL',
        summary     = 'Module for retrieving information about media files',
-       author      = "Thomas Schueppel, Dirk Meyer",
+       author      = 'Thomas Schueppel, Dirk Meyer, Jason Tackaberry',
        scripts     = [ 'bin/mminfo' ],
        rpminfo = {
            'requires':        'python-kaa-base >= 0.1.2, libdvdread >= 0.9.4',
