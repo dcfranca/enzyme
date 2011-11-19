@@ -1,4 +1,6 @@
-import struct, string, re
+import string
+import re
+import struct
 
 __all__ = [ 'resolve' ]
 

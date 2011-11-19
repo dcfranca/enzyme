@@ -29,20 +29,20 @@
 #
 # -----------------------------------------------------------------------------
 
-# python imports
+
 import re
 import logging
-
-# kaa imports
-import kaa
-from kaa.utils import property
-
 import fourcc
 import language
+from exceptions import *
 
 UNPRINTABLE_KEYS = [ 'thumbnail', 'url', 'codec_private' ]
-
-# media type definitions
+EXTENSION_DEVICE    = 'device'
+EXTENSION_DIRECTORY = 'directory'
+EXTENSION_STREAM    = 'stream'
+MEDIACORE = ['title', 'caption', 'comment', 'size', 'type', 'subtype', 'timestamp',
+             'keywords', 'country', 'language', 'langcode', 'url', 'media', 'artist',
+             'mime', 'datetime', 'tags', 'hash']
 MEDIA_AUDIO     = 'MEDIA_AUDIO'
 MEDIA_VIDEO     = 'MEDIA_VIDEO'
 MEDIA_IMAGE     = 'MEDIA_IMAGE'
@@ -53,59 +53,9 @@ MEDIA_DIRECTORY = 'MEDIA_DIRECTORY'
 MEDIA_DISC      = 'MEDIA_DISC'
 MEDIA_GAME      = 'MEDIA_GAME'
 
-
-MEDIACORE = ['title', 'caption', 'comment', 'size', 'type', 'subtype', 'timestamp',
-             'keywords', 'country', 'language', 'langcode', 'url', 'media', 'artist',
-             'mime', 'datetime', 'tags', 'hash']
-
-EXTENSION_DEVICE    = 'device'
-EXTENSION_DIRECTORY = 'directory'
-EXTENSION_STREAM    = 'stream'
-
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger('kaa-metadata')
 
-
-class ParseError:
-    pass
-
-
-_features = {
-    # Guess if a file is a recording of a TV series. It matches names in the
-    # style of 'series 1x01 episode' and 'series s1e01 episode' where the
-    # delimiter may not be a space but also point or minus.
-    'VIDEO_SERIES_PARSER':
-        [ False, '(.+?)[\. _-]+[sS]?([0-9]|[0-9][0-9])[xeE]([0-9]|[0-9][0-9])[\. _-]+(.+)' ]
-}
-
-def enable_feature(var, value=None):
-    """
-    Enable optional features defined in the _feature variable. Some
-    feature have a value. These values are set to reasonable default
-    values but can be overwritten by setting the optional parameter
-    value.
-    """
-    _features[var][0] = True
-    if value:
-        _features[var][1] = value
-
-def features():
-    """
-    List all optional features
-    """
-    return _features.keys()
-
-def feature_enabled(feature):
-    """
-    Returns if a feature was activated
-    """
-    return _features[feature][0]
-
-def feature_config(feature):
-    """
-    Returns the configuration of the given feature
-    """
-    return _features[feature][1]
 
 class Media(object):
     media = None
@@ -138,15 +88,14 @@ class Media(object):
         # Matroska tags defined at http://www.matroska.org/technical/specs/tagging/index.html
         # All tag names will be lower-cased.
         self.tags = Tags()
-        for key in self._keys:
-            if key not in ('media', 'tags'):
-                setattr(self, key, None)
+        for key in self._keys and key not in ['media', 'tags']:
+            setattr(self, key, None)
 
 
     #
     # unicode and string convertion for debugging
     #
-
+    #TODO: Fix that mess
     def __unicode__(self):
         result = u''
 
@@ -215,7 +164,7 @@ class Media(object):
 
 
     def __str__(self):
-        return kaa.unicode_to_str(unicode(self))
+        return unicode(self).encode()
 
 
     def __repr__(self):

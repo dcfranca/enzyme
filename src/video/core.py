@@ -32,11 +32,13 @@
 import re
 import os
 
-from kaa.metadata.core import ParseError, Media, MEDIA_VIDEO, MEDIA_SUBTITLE, \
+from ..core import Media, MEDIA_VIDEO, MEDIA_SUBTITLE, \
      MEDIA_CHAPTER, MEDIA_AV, MEDIA_AUDIO, MEDIA_DISC, Collection, Tag, Tags, \
      feature_enabled, feature_config
 
-from kaa.metadata.audio.core import Audio as AudioStream
+import ..exceptions.*
+
+from ..audio.core import Audio as AudioStream
 
 
 VIDEOCORE = ['length', 'encoder', 'bitrate', 'samplerate', 'codec', 'format',
@@ -104,6 +106,8 @@ class AVContainer(Media):
         Set the URL of the source
         """
         Media._set_url(self, url)
+        #TODO: Use guessit
+        '''
         if feature_enabled('VIDEO_SERIES_PARSER') and not self.series:
             # special tv series handling to detect the series and episode
             # name and number
@@ -115,6 +119,7 @@ class AVContainer(Media):
                     self.series, self.title = match[1], match[4]
                 except ValueError:
                     pass
+        '''
 
     def _finalize(self):
         """
