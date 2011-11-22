@@ -1,15 +1,8 @@
 # -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------------
-# core.py - basic video class
-# -----------------------------------------------------------------------------
-# $Id$
-#
-# -----------------------------------------------------------------------------
 # kaa-Metadata - Media Metadata for Python
-# Copyright (C) 2003-2006 Thomas Schueppel, Dirk Meyer
 #
-# First Edition: Thomas Schueppel <stain@acm.org>
-# Maintainer:    Dirk Meyer <dischi@freevo.org>
+# Copyright (C) 2003-2006 Thomas Schueppel <stain@acm.org>
+# Copyright (C) 2003-2006 Dirk Meyer <dischi@freevo.org>
 #
 # Please see the file AUTHORS for a complete list of authors.
 #
@@ -27,7 +20,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
-# -----------------------------------------------------------------------------
 
 import re
 import os
