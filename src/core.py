@@ -80,7 +80,7 @@ class Media(object):
         # Matroska tags defined at http://www.matroska.org/technical/specs/tagging/index.html
         # All tag names will be lower-cased.
         self.tags = Tags()
-        for key in self._keys and key not in ['media', 'tags']:
+        for key in set(self._keys) - set(['media', 'tags']):
             setattr(self, key, None)
 
 
