@@ -21,68 +21,61 @@
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-# import factory code for kaa.metadata access
-from factory import *
-from version import VERSION
-import disc.cdrom as cdrom
+import mimetypes
+import os
+import sys
+from exceptions import *
 
-from core import Media, MEDIA_AUDIO, MEDIA_VIDEO, MEDIA_IMAGE, MEDIA_AV, \
-     MEDIA_SUBTITLE, MEDIA_CHAPTER, MEDIA_DIRECTORY, MEDIA_DISC, MEDIA_GAME, \
-     EXTENSION_STREAM, EXTENSION_DEVICE, EXTENSION_DIRECTORY, \
-     enable_feature, features
+PARSERS = [('audio.mp3', ['audio/mpeg'], ['mp3']),
+           ('audio.ac3', ['audio/ac3'], ['ac3']),
+           ('audio.adts', ['application/adts'], ['aac']),
+           ('audio.m4a', ['audio/m4a'], ['m4a']),
+           ('audio.ogg', ['application/ogg'], ['ogg']),
+           ('audio.pcm', ['application/pcm'], ['aif','voc','au']),
+           ('video.asf', ['video/asf'], ['asf','wmv','wma']),
+           ('video.flv', ['video/flv'], ['flv']),
+           ('video.mkv', ['video/x-matroska', 'audio/x-matroska', 'application/mkv'], ['mkv', 'mka', 'webm']),
+           ('video.mp4', ['video/quicktime'], ['mov', 'qt', 'mp4', 'mp4a', '3gp', '3gp2', 'mk2']),
+           ('video.mpeg', ['video/mpeg'], ['mpeg','mpg','mp4', 'ts']),
+           ('video.ogm', ['application/ogg'], ['ogm', 'ogg']),
+           ('video.real', ['video/real'], ['rm', 'ra', 'ram']),
+           ('video.riff', ['video/avi'], ['wav','avi']),
+           ('video.vcd', ['video/vcd'], ['cue']),
+#           ('disc.audio', ['audio/cd'], [EXTENSION_DEVICE]),
+#           ('disc.dvd', ['video/dvd'], [EXTENSION_DEVICE]),
+#           ('disc.dvd', ['video/dvd'], [EXTENSION_DIRECTORY]),
+#           ('disc.dvd', ['video/dvd'], ['iso']),
+#           ('disc.vcd', ['video/vcd'], [EXTENSION_DEVICE]),
+#           ('disc.data', ['cd/unknown'], [EXTENSION_DEVICE]),
+           ('image.bmp', ['image/bmp'], ['bmp']),
+           ('image.gif', ['image/gif'], ['gif']),
+           ('image.jpg', ['image/jpeg'], ['jpg','jpeg']),
+           ('image.png', ['image/png'], ['png']),
+           ('image.tiff', ['image/tiff'], ['tif','tiff']),
+           ('games.gameboy', ['games/gameboy'], ['gba', 'gb', 'gbc']),
+           ('games.snes', ['games/snes'], ['smc', 'sfc', 'fig']),
+#           ('misc.directory', ['directory'], [EXTENSION_DIRECTORY]),
+#           ('misc.xmlfile', ['text/xml'], ['xml', 'fxd', 'html', 'htm']),
+#           ('audio.webradio', ['text/plain'], [EXTENSION_STREAM]),
+           ('audio.flac', ['application/flac'], ['flac'])]
 
-# use network functions
-USE_NETWORK = 1
-
-# Audio parsers
-register('audio/mpeg', ('mp3',), 'audio.mp3')
-register('audio/ac3', ('ac3',), 'audio.ac3')
-register('application/adts', ('aac',), 'audio.adts')
-register('audio/m4a', ('m4a',), 'audio.m4a')
-register('application/ogg', ('ogg',), 'audio.ogg', magic='OggS\00')
-register('application/pcm', ('aif','voc','au'), 'audio.pcm')
-
-# Video parsers
-register('video/asf', ('asf','wmv','wma'), 'video.asf')
-register('video/flv', ('flv',), 'video.flv')
-register('application/mkv', ('mkv', 'mka', 'webm'), 'video.mkv')
-register('video/quicktime', ('mov', 'qt', 'mp4', 'mp4a', '3gp', '3gp2', 'mk2'), 'video.mp4')
-register('video/mpeg', ('mpeg','mpg','mp4', 'ts'), 'video.mpeg')
-register('application/ogg', ('ogm', 'ogg'), 'video.ogm')
-register('video/real', ('rm', 'ra', 'ram'), 'video.real')
-register('video/avi', ('wav','avi'), 'video.riff')
-register('video/vcd', ('cue',), 'video.vcd')
-
-# Disc parsers
-register('audio/cd', EXTENSION_DEVICE, 'disc.audio')
-register('video/dvd', EXTENSION_DEVICE, 'disc.dvd')
-register('video/dvd', EXTENSION_DIRECTORY, 'disc.dvd')
-register('video/dvd', ('iso',), 'disc.dvd')
-register('video/vcd', EXTENSION_DEVICE, 'disc.vcd')
-register('cd/unknown', EXTENSION_DEVICE, 'disc.data')
-
-# Image parsers
-if 0:
-    # exiv2 based generic image parser. Experimental
-    # add list of all supported extensions
-    register('image/tiff', ('tif','tiff', 'jpg'), 'image.generic')
-    register('image/png', ('png',), 'image.png')
-else:
-    register('image/bmp', ('bmp', ), 'image.bmp')
-    register('image/gif', ('gif', ), 'image.gif')
-    register('image/jpeg', ('jpg','jpeg'), 'image.jpg')
-    register('image/png', ('png',), 'image.png')
-    register('image/tiff', ('tif','tiff'), 'image.tiff')
-
-# Games parsers
-register('games/gameboy', ('gba', 'gb', 'gbc'), 'games.gameboy')
-register('games/snes', ('smc', 'sfc', 'fig'), 'games.snes')
-
-# Misc parsers
-register('directory', EXTENSION_DIRECTORY, 'misc.directory')
-register('text/xml', ('xml', 'fxd', 'html', 'htm'), 'misc.xmlfile')
-
-# These parsers are prone to producing false positives, so we use them
-# last.  They should be fixed.
-register('text/plain', EXTENSION_STREAM, 'audio.webradio')
-register('application/flac', ('flac',), 'audio.flac')
+def parse(path):
+    if not os.path.isfile(path):
+        raise ValueError('Invalid path')
+    extension = os.path.splitext(path)[1][1:]
+    mimetype = mimetypes.guess_type(path)[0]
+    parser_ext = None
+    parser_mime = None
+    for (parser_name, parser_mimetypes, parser_extensions) in PARSERS:
+        if mimetype in parser_mimetypes:
+            parser_mime = parser_name
+        if extension in parser_extensions:
+            parser_ext = parser_name
+    parser = parser_ext or parser_mime
+    if not parser:
+        raise NoParserError()
+    mod = getattr(__import__(parser, globals=globals(), locals=locals(), fromlist=[], level=-1), parser.split('.')[1])
+    f = open(path, 'rb')
+    p = mod.Parser(f)
+    return p
+    

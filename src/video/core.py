@@ -25,11 +25,8 @@ import re
 import os
 
 from ..core import Media, MEDIA_VIDEO, MEDIA_SUBTITLE, \
-     MEDIA_CHAPTER, MEDIA_AV, MEDIA_AUDIO, MEDIA_DISC, Collection, Tag, Tags, \
-     feature_enabled, feature_config
-
-import ..exceptions.*
-
+     MEDIA_CHAPTER, MEDIA_AV, MEDIA_AUDIO, MEDIA_DISC, Collection, Tag, Tags
+from ..exceptions import *
 from ..audio.core import Audio as AudioStream
 
 
