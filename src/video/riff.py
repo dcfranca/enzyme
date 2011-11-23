@@ -368,7 +368,7 @@ class Riff(core.AVContainer):
 
                     # num/den indicates pixel aspect; convert to video aspect,
                     # so we need frame width and height.
-                    if 0 not in (num, den):
+                    if 0 not in [num, den]:
                         width, height = self.video[-1].width, self.video[-1].height
                         self.video[-1].aspect = num / float(den) * width / height
 
@@ -453,7 +453,7 @@ class Riff(core.AVContainer):
                 value = value.replace('\0', '').lstrip().rstrip()
                 if value:
                     retval[key] = value
-                    if key in ('IDIT', 'ICRD'):
+                    if key in ['IDIT', 'ICRD']:
                         # Timestamp the video was created.  Spec says it
                         # should be a format like "Wed Jan 02 02:03:55 1990"
                         # Casio S500 uses "2005/12/24/ 14:11", but I've
@@ -485,7 +485,7 @@ class Riff(core.AVContainer):
             key = file.read(4)
             if key == 'movi' and self.video and not self.video[-1].aspect and \
                self.video[-1].width and self.video[-1].height and \
-               self.video[-1].format in ('DIVX', 'XVID', 'FMP4'): # any others?
+               self.video[-1].format in ['DIVX', 'XVID', 'FMP4']: # any others?
                 # If we don't have the aspect (i.e. it isn't in odml vprp
                 # header), but we do know the video's dimensions, and
                 # we're dealing with an mpeg4 stream, try to get the aspect

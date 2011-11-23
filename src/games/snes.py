@@ -62,7 +62,7 @@ class SNES(core.Game):
             except Exception, e:
                 continue
 
-            if not rom_type in (0, 1, 2, 3, 4, 5, 19, 227, 246):
+            if not rom_type in [0, 1, 2, 3, 4, 5, 19, 227, 246]:
                 # invalid acording to the doc at www.classicgaming.com
                 continue
 

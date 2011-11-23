@@ -583,7 +583,7 @@ class Matroska(core.AVContainer):
                         value = int(settings_elem.get_value())
                         self._set('interlaced', value)
 
-                if None not in (d_width, d_height):
+                if None not in [d_width, d_height]:
                     track.aspect = float(d_width) / d_height
 
             else:

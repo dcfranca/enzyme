@@ -133,7 +133,7 @@ class Media(object):
         for key, l in lists:
             for n, item in enumerate(l):
                 label = '+-- ' + key.rstrip('s').capitalize()
-                if key not in ('tracks', 'subtitles', 'chapters'):
+                if key not in ['tracks', 'subtitles', 'chapters']:
                     label += ' Track'
                 result += u'%s #%d\n' % (label, n+1)
                 result += '|    ' + re.sub(r'\n(.)', r'\n|    \1', unicode(item))

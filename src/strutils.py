@@ -45,7 +45,7 @@ def str_to_unicode(s, encoding=None):
     if not encoding:
         encoding = ENCODING
 
-    for c in (encoding, "utf-8", "latin-1"):
+    for c in [encoding, "utf-8", "latin-1"]:
         try:
             return s.decode(c)
         except UnicodeDecodeError:
@@ -69,7 +69,7 @@ def unicode_to_str(s, encoding=None):
     if not encoding:
         encoding = ENCODING
 
-    for c in (encoding, "utf-8", "latin-1"):
+    for c in [encoding, "utf-8", "latin-1"]:
         try:
             return s.encode(c)
         except UnicodeDecodeError:

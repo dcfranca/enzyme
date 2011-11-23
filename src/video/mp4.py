@@ -189,13 +189,13 @@ class MPEG4(core.AVContainer):
             h = file.read(8)
             (size,type) = struct.unpack('>I4s',h)
 
-        while type in ('mdat', 'skip'):
+        while type in ['mdat', 'skip']:
             # movie data at the beginning, skip
             file.seek(size-8, 1)
             h = file.read(8)
             (size,type) = struct.unpack('>I4s',h)
 
-        if not type in ('moov', 'wide', 'free'):
+        if not type in ['moov', 'wide', 'free']:
             log.debug('invalid header: %r' % type)
             raise ParseError()
 
@@ -343,10 +343,10 @@ class MPEG4(core.AVContainer):
                         else:
                             if mdia[1].startswith('st'):
                                 log.debug('  --> %s, %s (sample)' % mdia)
-                            elif mdia[1] in ('vmhd',) and not tracktype:
+                            elif mdia[1] == 'vmhd' and not tracktype:
                                 # indicates that this track is video
                                 tracktype = 'video'
-                            elif mdia[1] in ('vmhd', 'smhd') and not tracktype:
+                            elif mdia[1] in ['vmhd', 'smhd'] and not tracktype:
                                 # indicates that this track is audio
                                 tracktype = 'audio'
                             else:
@@ -463,7 +463,7 @@ class MPEG4(core.AVContainer):
                 self._references.append((url, quality, datarate))
 
         else:
-            if not atomtype in ('wide', 'free'):
+            if not atomtype in ['wide', 'free']:
                 log.info('unhandled base atom %s' % atomtype)
 
             # Skip unknown atoms

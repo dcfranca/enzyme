@@ -412,7 +412,7 @@ class MPEG(core.AVContainer):
             self.sequence_header_offset = offset
             return 0
 
-        if id in (PRIVATE_STREAM1, PRIVATE_STREAM2):
+        if id in [PRIVATE_STREAM1, PRIVATE_STREAM2]:
             # private stream. we don't know, but maybe we can guess later
             add = ord(buffer[offset+8])
             # if (ord(buffer[offset+6]) & 4) or 1:

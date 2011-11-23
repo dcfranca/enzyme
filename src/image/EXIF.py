@@ -1174,7 +1174,7 @@ class EXIF_header:
                     values = []
                     signed = (field_type in [6, 8, 9, 10])
                     for dummy in range(count):
-                        if field_type in (5, 10):
+                        if field_type in [5, 10]:
                             # a ratio
                             value = Ratio(self.s2n(offset, 4, signed),
                                           self.s2n(offset + 4, 4, signed))
@@ -1302,7 +1302,7 @@ class EXIF_header:
         # type of the makernote (1 or 2, as a short).  If the word Nikon is
         # not at the start of the makernote, it's probably type 2, since some
         # cameras work that way.
-        if make in ('NIKON', 'NIKON CORPORATION'):
+        if make in ['NIKON', 'NIKON CORPORATION']:
             if note.values[0:7] == [78, 105, 107, 111, 110, 0, 1]:
                 if self.debug:
                     print "Looks like a type 1 Nikon MakerNote."
@@ -1329,7 +1329,7 @@ class EXIF_header:
             self.dump_IFD(note.field_offset+8, 'MakerNote',
                           dict=MAKERNOTE_OLYMPUS_TAGS)
             # TODO
-            #for i in (('MakerNote Tag 0x2020', MAKERNOTE_OLYMPUS_TAG_0x2020),):
+            #for i in [('MakerNote Tag 0x2020', MAKERNOTE_OLYMPUS_TAG_0x2020)]:
             #    self.decode_olympus_tag(self.tags[i[0]].values, i[1])
             #return
 
@@ -1407,7 +1407,7 @@ def process_file(f, stop_tag='UNDEF', details=True, debug=False):
         offset = 0
     elif data[0:2] == '\xFF\xD8':
         # it's a JPEG file
-        while data[2] == '\xFF' and data[6:10] in ('JFIF', 'JFXX', 'OLYM', 'Phot'):
+        while data[2] == '\xFF' and data[6:10] in ['JFIF', 'JFXX', 'OLYM', 'Phot']:
             length = ord(data[4])*256+ord(data[5])
             f.read(length-8)
             # fake an EXIF beginning of file
@@ -1518,13 +1518,13 @@ if __name__ == '__main__':
     stop_tag = 'UNDEF'
     debug = False
     for o, a in opts:
-        if o in ("-h", "--help"):
+        if o in ["-h", "--help"]:
             usage(0)
-        if o in ("-q", "--quick"):
+        if o in ["-q", "--quick"]:
             detailed = False
-        if o in ("-t", "--stop-tag"):
+        if o in ["-t", "--stop-tag"]:
             stop_tag = a
-        if o in ("-d", "--debug"):
+        if o in ["-d", "--debug"]:
             debug = True
 
     # output info for each file
@@ -1544,7 +1544,7 @@ if __name__ == '__main__':
         x=data.keys()
         x.sort()
         for i in x:
-            if i in ('JPEGThumbnail', 'TIFFThumbnail'):
+            if i in ['JPEGThumbnail', 'TIFFThumbnail']:
                 continue
             try:
                 print '   %s (%s): %s' % \

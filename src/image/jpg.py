@@ -168,7 +168,7 @@ class JPG(core.Image):
                 # Start of Scan marker (FFDA)
                 # Quantization table marker (FFDB)
                 # Restart Interval (FFDD) ???
-                if not segtype in (0xc4, 0xda, 0xdb, 0xdd):
+                if not segtype in [0xc4, 0xda, 0xdb, 0xdd]:
                     log.info("SEGMENT: 0x%x%x, len=%d" % (ff,segtype,seglen))
                 file.seek(seglen-2,1)
             app = file.read(4)

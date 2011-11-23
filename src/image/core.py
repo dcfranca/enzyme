@@ -58,7 +58,7 @@ class BinsParser(xml.sax.ContentHandler):
 
     def startElement(self, name, attr):
         if self.mode == 0:
-            if name not in ('album', 'image'):
+            if name not in ['album', 'image']:
                 raise ParseError
             self.mode = 1
         if self.mode == 2 and name == 'field':
