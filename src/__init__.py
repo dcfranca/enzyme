@@ -75,7 +75,7 @@ def parse(path):
     if not parser:
         raise NoParserError()
     mod = getattr(__import__(parser, globals=globals(), locals=locals(), fromlist=[], level=-1), parser.split('.')[1])
-    f = open(path, 'rb')
-    p = mod.Parser(f)
+    with open(path, 'rb') as f:
+        p = mod.Parser(f)
     return p
     
