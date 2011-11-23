@@ -84,7 +84,6 @@ class Media(object):
         for key in set(self._keys) - set(['media', 'tags']):
             setattr(self, key, None)
 
-
     #
     # unicode and string convertion for debugging
     #
@@ -135,7 +134,7 @@ class Media(object):
                 label = '+-- ' + key.rstrip('s').capitalize()
                 if key not in ['tracks', 'subtitles', 'chapters']:
                     label += ' Track'
-                result += u'%s #%d\n' % (label, n+1)
+                result += u'%s #%d\n' % (label, n + 1)
                 result += '|    ' + re.sub(r'\n(.)', r'\n|    \1', unicode(item))
 
         # print tables
@@ -155,10 +154,8 @@ class Media(object):
                     result += u'|    | %s: %s\n' % (unicode(key), value)
         return result
 
-
     def __str__(self):
         return unicode(self).encode()
-
 
     def __repr__(self):
         if hasattr(self, 'url'):
@@ -166,24 +163,21 @@ class Media(object):
         else:
             return '<%s>' % (str(self.__class__)[8:-2])
 
-
     #
     # internal functions
     #
-
     def _appendtable(self, name, hashmap):
         """
         Appends a tables of additional metadata to the Object.
         If such a table already exists, the given tables items are
         added to the existing one.
         """
-        if not self.tables.has_key(name):
+        if name not in self.tables:
             self.tables[name] = hashmap
         else:
             # Append to the already existing table
             for k in hashmap.keys():
                 self.tables[name][k] = hashmap[k]
-
 
     def _set(self, key, value):
         """
@@ -249,25 +243,21 @@ class Media(object):
         if 'language' in self._keys:
             self.langcode, self.language = language.resolve(self.language)
 
-
     #
     # data access
     #
-
     def __contains__(self, key):
         """
         Test if key exists in the dict
         """
         return hasattr(self, key)
 
-
-    def get(self, attr, default = None):
+    def get(self, attr, default=None):
         """
         Returns the given attribute. If the attribute is not set by
         the parser return 'default'.
         """
         return getattr(self, attr, default)
-
 
     def __getitem__(self, attr):
         """
@@ -275,20 +265,17 @@ class Media(object):
         """
         return getattr(self, attr, None)
 
-
     def __setitem__(self, key, value):
         """
         Set the value of 'key' to 'value'
         """
         setattr(self, key, value)
 
-
     def has_key(self, key):
         """
         Check if the object has an attribute 'key'
         """
         return hasattr(self, key)
-
 
     def convert(self):
         """
@@ -301,7 +288,6 @@ class Media(object):
                 value = [x.convert() for x in value]
             result[k] = value
         return result
-
 
     def keys(self):
         """
@@ -353,7 +339,6 @@ class Tag(object):
     @langcode.setter
     def langcode(self, code):
         self._langcode, self.language = language.resolve(code)
-
 
 
 class Tags(dict, Tag):

@@ -20,11 +20,13 @@
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
+
 import string
 import re
 import struct
 
 __all__ = ['resolve']
+
 
 def resolve(code):
     """

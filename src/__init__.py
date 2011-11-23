@@ -31,23 +31,24 @@ PARSERS = [('audio.mp3', ['audio/mpeg'], ['mp3']),
            ('audio.adts', ['application/adts'], ['aac']),
            ('audio.m4a', ['audio/m4a'], ['m4a']),
            ('audio.ogg', ['application/ogg'], ['ogg']),
-           ('audio.pcm', ['application/pcm'], ['aif','voc','au']),
-           ('video.asf', ['video/asf'], ['asf','wmv','wma']),
+           ('audio.pcm', ['application/pcm'], ['aif', 'voc', 'au']),
+           ('video.asf', ['video/asf'], ['asf', 'wmv', 'wma']),
            ('video.flv', ['video/flv'], ['flv']),
            ('video.mkv', ['video/x-matroska', 'audio/x-matroska', 'application/mkv'], ['mkv', 'mka', 'webm']),
            ('video.mp4', ['video/quicktime'], ['mov', 'qt', 'mp4', 'mp4a', '3gp', '3gp2', 'mk2']),
-           ('video.mpeg', ['video/mpeg'], ['mpeg','mpg','mp4', 'ts']),
+           ('video.mpeg', ['video/mpeg'], ['mpeg', 'mpg', 'mp4', 'ts']),
            ('video.ogm', ['application/ogg'], ['ogm', 'ogg']),
            ('video.real', ['video/real'], ['rm', 'ra', 'ram']),
-           ('video.riff', ['video/avi'], ['wav','avi']),
+           ('video.riff', ['video/avi'], ['wav', 'avi']),
            ('image.bmp', ['image/bmp'], ['bmp']),
            ('image.gif', ['image/gif'], ['gif']),
-           ('image.jpg', ['image/jpeg'], ['jpg','jpeg']),
+           ('image.jpg', ['image/jpeg'], ['jpg', 'jpeg']),
            ('image.png', ['image/png'], ['png']),
-           ('image.tiff', ['image/tiff'], ['tif','tiff']),
+           ('image.tiff', ['image/tiff'], ['tif', 'tiff']),
            ('games.gameboy', ['games/gameboy'], ['gba', 'gb', 'gbc']),
            ('games.snes', ['games/snes'], ['smc', 'sfc', 'fig']),
            ('audio.flac', ['application/flac'], ['flac'])]
+
 
 def parse(path):
     if not os.path.isfile(path):
@@ -68,4 +69,3 @@ def parse(path):
     with open(path, 'rb') as f:
         p = mod.Parser(f)
     return p
-    
