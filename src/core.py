@@ -30,21 +30,21 @@ from exceptions import *
 from strutils import str_to_unicode, unicode_to_str
 
 UNPRINTABLE_KEYS = ['thumbnail', 'url', 'codec_private']
-EXTENSION_DEVICE    = 'device'
+EXTENSION_DEVICE = 'device'
 EXTENSION_DIRECTORY = 'directory'
-EXTENSION_STREAM    = 'stream'
+EXTENSION_STREAM = 'stream'
 MEDIACORE = ['title', 'caption', 'comment', 'size', 'type', 'subtype', 'timestamp',
              'keywords', 'country', 'language', 'langcode', 'url', 'media', 'artist',
              'mime', 'datetime', 'tags', 'hash']
-MEDIA_AUDIO     = 'MEDIA_AUDIO'
-MEDIA_VIDEO     = 'MEDIA_VIDEO'
-MEDIA_IMAGE     = 'MEDIA_IMAGE'
-MEDIA_AV        = 'MEDIA_AV'
-MEDIA_SUBTITLE  = 'MEDIA_SUBTITLE'
-MEDIA_CHAPTER   = 'MEDIA_CHAPTER'
+MEDIA_AUDIO = 'MEDIA_AUDIO'
+MEDIA_VIDEO = 'MEDIA_VIDEO'
+MEDIA_IMAGE = 'MEDIA_IMAGE'
+MEDIA_AV = 'MEDIA_AV'
+MEDIA_SUBTITLE = 'MEDIA_SUBTITLE'
+MEDIA_CHAPTER = 'MEDIA_CHAPTER'
 MEDIA_DIRECTORY = 'MEDIA_DIRECTORY'
-MEDIA_DISC      = 'MEDIA_DISC'
-MEDIA_GAME      = 'MEDIA_GAME'
+MEDIA_DISC = 'MEDIA_DISC'
+MEDIA_GAME = 'MEDIA_GAME'
 
 # get logging object
 log = logging.getLogger(__name__)

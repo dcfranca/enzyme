@@ -517,7 +517,7 @@ class Riff(core.AVContainer):
 
         elif name == 'JUNK':
             self.junkStart = file.tell() - 8
-            self.junkSize  = size
+            self.junkSize = size
             file.seek(size, 1)
         elif name == 'idx1':
             self.has_idx = True

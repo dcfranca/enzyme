@@ -35,11 +35,11 @@ import core
 # get logging object
 log = logging.getLogger(__name__)
 
-PACKET_TYPE_HEADER   = 0x01
+PACKET_TYPE_HEADER = 0x01
 PACKED_TYPE_METADATA = 0x03
-PACKED_TYPE_SETUP    = 0x05
-PACKET_TYPE_BITS     = 0x07
-PACKET_IS_SYNCPOINT  = 0x08
+PACKED_TYPE_SETUP = 0x05
+PACKET_TYPE_BITS = 0x07
+PACKET_IS_SYNCPOINT = 0x08
 
 #VORBIS_VIDEO_PACKET_INFO = 'video'
 
@@ -67,9 +67,9 @@ class Ogm(core.AVContainer):
 
     def __init__(self, file):
         core.AVContainer.__init__(self)
-        self.samplerate  = 1
+        self.samplerate = 1
         self.all_streams = []           # used to add meta data to streams
-        self.all_header  = []
+        self.all_header = []
 
         for i in range(MAXITERATIONS):
             granule, nextlen = self._parseOGGS(file)

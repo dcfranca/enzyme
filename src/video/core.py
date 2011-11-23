@@ -34,10 +34,10 @@ VIDEOCORE = ['length', 'encoder', 'bitrate', 'samplerate', 'codec', 'format',
              'samplebits', 'width', 'height', 'fps', 'aspect', 'trackno',
              'fourcc', 'id', 'enabled', 'default', 'codec_private']
 
-AVCORE    = ['length', 'encoder', 'trackno', 'trackof', 'copyright', 'product',
-             'genre', 'writer', 'producer', 'studio', 'rating', 'actors', 'thumbnail',
-             'delay', 'image', 'video', 'audio', 'subtitles', 'chapters', 'software',
-             'summary', 'synopsis', 'season', 'episode', 'series']
+AVCORE = ['length', 'encoder', 'trackno', 'trackof', 'copyright', 'product',
+          'genre', 'writer', 'producer', 'studio', 'rating', 'actors', 'thumbnail',
+          'delay', 'image', 'video', 'audio', 'subtitles', 'chapters', 'software',
+          'summary', 'synopsis', 'season', 'episode', 'series']
 
 class VideoStream(Media):
     """
@@ -87,7 +87,7 @@ class AVContainer(Media):
         self.audio = []
         self.video = []
         self.subtitles = []
-        self.chapters  = []
+        self.chapters = []
 
 
     def _set_url(self, url):

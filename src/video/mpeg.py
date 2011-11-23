@@ -57,25 +57,25 @@ for i in range(0x01,0xAF):
 ##------------------------------------------------------------------------
 ## START CODES
 ##------------------------------------------------------------------------
-PICTURE   = 0x00
-USERDATA  = 0xB2
-SEQ_HEAD  = 0xB3
-SEQ_ERR   = 0xB4
+PICTURE = 0x00
+USERDATA = 0xB2
+SEQ_HEAD = 0xB3
+SEQ_ERR = 0xB4
 EXT_START = 0xB5
-SEQ_END   = 0xB7
-GOP       = 0xB8
+SEQ_END = 0xB7
+GOP = 0xB8
 
-SEQ_START_CODE  = 0xB3
-PACK_PKT        = 0xBA
-SYS_PKT         = 0xBB
-PADDING_PKT     = 0xBE
-AUDIO_PKT       = 0xC0
-VIDEO_PKT       = 0xE0
+SEQ_START_CODE = 0xB3
+PACK_PKT = 0xBA
+SYS_PKT = 0xBB
+PADDING_PKT = 0xBE
+AUDIO_PKT = 0xC0
+VIDEO_PKT = 0xE0
 PRIVATE_STREAM1 = 0xBD
 PRIVATE_STREAM2 = 0xBf
 
 TS_PACKET_LENGTH = 188
-TS_SYNC          = 0x47
+TS_SYNC = 0x47
 
 ##------------------------------------------------------------------------
 ## FRAME_RATE
@@ -227,7 +227,7 @@ class MPEG(core.AVContainer):
         """
         file.seek(0)
         buffer = ''
-        count  = 0
+        count = 0
         while 1:
             if len(buffer) < 1000:
                 count += 1
@@ -350,8 +350,8 @@ class MPEG(core.AVContainer):
         read PTS (PES timestamp) at the buffer beginning (5 Bytes)
         """
         high = ((ord(buffer[0]) & 0xF) >> 1)
-        med  = (ord(buffer[1]) << 7) + (ord(buffer[2]) >> 1)
-        low  = (ord(buffer[3]) << 7) + (ord(buffer[4]) >> 1)
+        med = (ord(buffer[1]) << 7) + (ord(buffer[2]) >> 1)
+        low = (ord(buffer[3]) << 7) + (ord(buffer[4]) >> 1)
         return ((long(high) << 30 ) + (med << 15) + low) / 90000
 
 
@@ -496,10 +496,10 @@ class MPEG(core.AVContainer):
                 offset += buffer[offset+4:].find('\x00\x00\x01') + 4
 
         # fill in values for support functions:
-        self.__seek_size__   = 1000000
+        self.__seek_size__ = 1000000
         self.__sample_size__ = 10000
-        self.__search__      = self._find_timer_
-        self.filename        = file.name
+        self.__search__ = self._find_timer_
+        self.filename = file.name
 
         # get length of the file
         self.length = self.get_length()
@@ -534,7 +534,7 @@ class MPEG(core.AVContainer):
             return 0, None
 
         packet_length = (ord(buffer[4]) << 8) + ord(buffer[5]) + 6
-        align         = ord(buffer[6]) & 4
+        align = ord(buffer[6]) & 4
         header_length = ord(buffer[8])
 
         # PES ID (starting with 001)
@@ -588,8 +588,8 @@ class MPEG(core.AVContainer):
 
             # timestamp = self.ReadPTS(buffer[9:14])
             high = ((ord(buffer[9]) & 0xF) >> 1)
-            med  = (ord(buffer[10]) << 7) + (ord(buffer[11]) >> 1)
-            low  = (ord(buffer[12]) << 7) + (ord(buffer[13]) >> 1)
+            med = (ord(buffer[10]) << 7) + (ord(buffer[11]) >> 1)
+            low = (ord(buffer[12]) << 7) + (ord(buffer[13]) >> 1)
             return packet_length, 9
 
         return packet_length, None
@@ -633,10 +633,10 @@ class MPEG(core.AVContainer):
         self.type = 'MPEG-PES'
 
         # fill in values for support functions:
-        self.__seek_size__   = 10000000  # 10 MB
+        self.__seek_size__ = 10000000  # 10 MB
         self.__sample_size__ = 500000    # 500 k scanning
-        self.__search__      = self._find_timer_PES_
-        self.filename        = file.name
+        self.__search__ = self._find_timer_PES_
+        self.filename = file.name
 
         # get length of the file
         self.length = self.get_length()
@@ -648,12 +648,12 @@ class MPEG(core.AVContainer):
         Return position of timer in buffer or -1 if not found.
         This function is valid for PES files
         """
-        pos    = buffer.find('\x00\x00\x01')
+        pos = buffer.find('\x00\x00\x01')
         offset = 0
         if pos == -1 or offset + 1000 >= len(buffer):
             return None
 
-        retpos   = -1
+        retpos = -1
         ackcount = 0
         while offset + 1000 < len(buffer):
             pos, timestamp = self.ReadPESHeader(offset, buffer[offset:])
@@ -661,11 +661,11 @@ class MPEG(core.AVContainer):
                 retpos = offset + timestamp
             if pos == 0:
                 # Oops, that was a mpeg header, no PES header
-                offset  += buffer[offset:].find('\x00\x00\x01')
-                retpos   = -1
+                offset += buffer[offset:].find('\x00\x00\x01')
+                retpos = -1
                 ackcount = 0
             else:
-                offset   += pos
+                offset += pos
                 if retpos != -1:
                     ackcount += 1
             if ackcount > 10:
@@ -774,10 +774,10 @@ class MPEG(core.AVContainer):
             return 0
 
         # fill in values for support functions:
-        self.__seek_size__   = 10000000  # 10 MB
+        self.__seek_size__ = 10000000  # 10 MB
         self.__sample_size__ = 100000    # 100 k scanning
-        self.__search__      = self._find_timer_TS_
-        self.filename        = file.name
+        self.__search__ = self._find_timer_TS_
+        self.filename = file.name
 
         # get length of the file
         self.length = self.get_length()
@@ -869,7 +869,7 @@ class MPEG(core.AVContainer):
         if not hasattr(self, 'filename') or not hasattr(self, 'start'):
             return 0
 
-        file    = open(self.filename)
+        file = open(self.filename)
         seek_to = 0
 
         while 1:

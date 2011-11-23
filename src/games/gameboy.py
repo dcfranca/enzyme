@@ -61,7 +61,7 @@ class Gameboy(core.Game):
             # Retrieve the Rom Type (GB Colour or GB)j
             if file.read(1) == '\x80':
                 self.mime = 'games/gbc'
-                self.type  = 'GameBoyColour game'
+                self.type = 'GameBoyColour game'
             else:
                 self.mime = 'games/gb'
                 self.type = 'GameBoy game'

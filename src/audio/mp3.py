@@ -85,8 +85,8 @@ _MP3_HEADER_SEEK_LIMIT = 4096
 
 class MP3(core.Music):
 
-    fileName       = str();
-    fileSize       = int();
+    fileName = str();
+    fileSize = int();
 
     def __init__(self, file, tagVersion = eyeD3_tag.ID3_ANY_VERSION):
         core.Music.__init__(self)
@@ -268,11 +268,11 @@ class MP3(core.Music):
     def _parse_header(self, header):
         # http://mpgedit.org/mpgedit/mpeg_format/MP3Format.html
         bytes = struct.unpack('>i', header)[0]
-        mpeg_version =    (bytes >> 19) & 3
-        layer =           (bytes >> 17) & 3
-        bitrate =         (bytes >> 12) & 15
-        samplerate =      (bytes >> 10) & 3
-        mode =            (bytes >> 6)  & 3
+        mpeg_version = (bytes >> 19) & 3
+        layer = (bytes >> 17) & 3
+        bitrate = (bytes >> 12) & 15
+        samplerate = (bytes >> 10) & 3
+        mode = (bytes >> 6)  & 3
 
         if mpeg_version == 0:
             self.version = 2.5

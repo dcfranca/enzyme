@@ -282,7 +282,7 @@ class MPEG4(core.AVContainer):
                         log.exception('There was trouble extracting timestamp')
 
                 elif datatype == 'mdia':
-                    pos      += 8
+                    pos += 8
                     datasize -= 8
                     log.debug('--> mdia information')
 
@@ -308,11 +308,11 @@ class MPEG4(core.AVContainer):
                                 self.length = max(self.length, mdhd[4] / mdhd[3])
                         elif mdia[1] == 'minf':
                             # minf has only atoms inside
-                            pos -=      (mdia[0] - 8)
+                            pos -= (mdia[0] - 8)
                             datasize += (mdia[0] - 8)
                         elif mdia[1] == 'stbl':
                             # stbl has only atoms inside
-                            pos -=      (mdia[0] - 8)
+                            pos -= (mdia[0] - 8)
                             datasize += (mdia[0] - 8)
                         elif mdia[1] == 'hdlr':
                             hdlr = struct.unpack('>I4s4s', atomdata[pos+8:pos+8+12])
@@ -352,7 +352,7 @@ class MPEG4(core.AVContainer):
                             else:
                                 log.debug('  --> %s, %s (unknown)' % mdia)
 
-                        pos      += mdia[0]
+                        pos += mdia[0]
                         datasize -= mdia[0]
 
                 elif datatype == 'udta':
@@ -440,7 +440,7 @@ class MPEG4(core.AVContainer):
         elif atomtype == 'rmda':
             # reference
             atomdata = file.read(atomsize-8)
-            pos   = 0
+            pos = 0
             url = ''
             quality = 0
             datarate = 0
