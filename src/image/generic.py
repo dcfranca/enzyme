@@ -1,15 +1,4 @@
 # -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------------
-# generic.py - Generic Image Parser based on Exiv2
-# -----------------------------------------------------------------------------
-# $Id$
-#
-# Note: this parser supports all image types supported by exiv2. An
-# application based on kaa.metadata (or kaa.beacon) MUST check if it
-# supports the given mime type. E.g. exiv2 supports camera raw files
-# while an aplication like Freevo does not.
-#
-# -----------------------------------------------------------------------------
 # kaa-Metadata - Media Metadata for Python
 # Copyright (C) 2009 Dirk Meyer
 #
@@ -32,7 +21,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
-# -----------------------------------------------------------------------------
 
 __all__ = ['Parser']
 

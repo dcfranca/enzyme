@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------------
-# IPTC.py
-# -----------------------------------------------------------------------------
-# $Id$
-#
-# -----------------------------------------------------------------------------
 # kaa-Metadata - Media Metadata for Python
 # Copyright (C) 2003-2006 Thomas Schueppel, Dirk Meyer
 #
@@ -27,7 +21,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
-# -----------------------------------------------------------------------------
 
 
 # http://www.ap.org/apserver/userguide/codes.htm

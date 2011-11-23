@@ -1,13 +1,4 @@
 # -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------------
-# asf.py - asf file parser
-# -----------------------------------------------------------------------------
-# $Id$
-#
-# See http://download.microsoft.com/download/e/0/6/e06db390-1e2a-4978-\
-#     82bb-311810d8a28d/ASF_Specification.doc
-#
-# -----------------------------------------------------------------------------
 # kaa-Metadata - Media Metadata for Python
 # Copyright (C) 2003-2006 Thomas Schueppel, Dirk Meyer
 #
@@ -30,7 +21,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
-# -----------------------------------------------------------------------------
 
 __all__ = ['Parser']
 
