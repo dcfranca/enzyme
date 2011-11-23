@@ -35,7 +35,7 @@ import EXIF
 import IPTC
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # interesting file format info:
 # http://www.dcs.ed.ac.uk/home/mxr/gfx/2d-hi.html

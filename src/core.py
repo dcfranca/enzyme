@@ -46,7 +46,7 @@ MEDIA_DISC      = 'MEDIA_DISC'
 MEDIA_GAME      = 'MEDIA_GAME'
 
 # get logging object
-log = logging.getLogger('kaa-metadata')
+log = logging.getLogger(__name__)
 
 
 class Media(object):

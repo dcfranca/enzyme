@@ -34,7 +34,7 @@ import logging
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 PACKET_TYPE_HEADER   = 0x01
 PACKED_TYPE_METADATA = 0x03

@@ -32,7 +32,7 @@ import xml.sax
 from kaa.metadata.core import ParseError, Media, MEDIA_IMAGE
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # attributes for image files
 ATTRIBUTES = ['description', 'people', 'location', 'event', 'width', 'height',

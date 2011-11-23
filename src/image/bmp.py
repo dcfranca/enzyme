@@ -31,7 +31,7 @@ import logging
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # interesting file format info:
 # http://www.fortunecity.com/skyscraper/windows/364/bmpffrmt.html

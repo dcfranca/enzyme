@@ -34,7 +34,7 @@ import core
 # http://www.pcisys.net/~melanson/codecs/
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 class RealVideo(core.AVContainer):
     def __init__(self,file):

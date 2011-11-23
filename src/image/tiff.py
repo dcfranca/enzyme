@@ -32,7 +32,7 @@ import core
 import IPTC
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 
 MOTOROLASIGNATURE = 'MM\x00\x2a'

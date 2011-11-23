@@ -32,7 +32,7 @@ import logging
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 FLV_TAG_TYPE_AUDIO = 0x08
 FLV_TAG_TYPE_VIDEO = 0x09

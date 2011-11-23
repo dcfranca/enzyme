@@ -31,7 +31,7 @@ import logging
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # interesting file format info:
 # GameBoy Advance http://www.forums.emuita.it/index.php?showtopic=67255

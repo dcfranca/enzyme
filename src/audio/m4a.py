@@ -33,7 +33,7 @@ import logging
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 import struct
 

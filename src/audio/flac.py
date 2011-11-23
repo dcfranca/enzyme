@@ -32,7 +32,7 @@ import logging
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # See: http://flac.sourceforge.net/format.html
 

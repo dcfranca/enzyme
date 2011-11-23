@@ -35,7 +35,7 @@ import kaa
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # interesting file format info:
 # http://www.libpng.org/pub/png/png-sitemap.html#programming

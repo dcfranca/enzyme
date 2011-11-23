@@ -33,7 +33,7 @@ import core
 import kaa.metadata.audio.core as audiocore
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 def _guid(input):
     # Remove any '-'

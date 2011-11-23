@@ -34,7 +34,7 @@ import logging
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 VORBIS_PACKET_INFO = '\01vorbis'
 VORBIS_PACKET_HEADER = '\03vorbis'

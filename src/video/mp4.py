@@ -33,7 +33,7 @@ import struct
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 
 # http://developer.apple.com/documentation/QuickTime/QTFF/index.html

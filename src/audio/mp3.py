@@ -40,7 +40,7 @@ from eyeD3 import frames as eyeD3_frames
 
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # http://www.omniscia.org/~vivake/python/MP3Info.py
 

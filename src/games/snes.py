@@ -34,7 +34,7 @@ from re import match
 import core
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # interesting file format info:
 # http://www.classicgaming.com/epr/super/sneskart.html#embededcartridge
