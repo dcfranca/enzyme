@@ -503,8 +503,8 @@ class Matroska(core.AVContainer):
     def process_track(self, track):
         # Collapse generator into a list since we need to iterate over it
         # twice.
-        elements = [ x for x in self.process_one_level(track) ]
-        track_type = [ x.get_value() for x in elements if x.get_id() == MATROSKA_TRACK_TYPE_ID ]
+        elements = [x for x in self.process_one_level(track)]
+        track_type = [x.get_value() for x in elements if x.get_id() == MATROSKA_TRACK_TYPE_ID]
         if not track_type:
             log.debug('Bad track: no type id found')
             return

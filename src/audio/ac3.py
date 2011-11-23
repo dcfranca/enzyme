@@ -35,7 +35,7 @@ from ..exceptions import *
 #  10  32
 #  11  reserved
 
-FSCOD = [ 48000, 44100, 32000, 0 ]
+FSCOD = [48000, 44100, 32000, 0]
 
 # bsmod: Bit stream mode, 3 bits
 # bsmod acmod Type of Service
@@ -59,14 +59,14 @@ FSCOD = [ 48000, 44100, 32000, 0 ]
 #  110  2/2 4 L, R, SL, SR
 #  111  3/2 5 L, C, R, SL, SR
 
-ACMOD = [ ( '1+1', 2, 'Ch1, Ch2' ),
-          ( '1/0', 1, 'C' ),
-          ( '2/0', 2, 'L, R' ),
-          ( '3/0', 3, 'L, C, R' ),
-          ( '2/1', 3, 'L, R, S' ),
-          ( '3/1', 4, 'L, C, R, S' ),
-          ( '2/2', 4, 'L, R, SL, SR' ),
-          ( '3/2', 5, 'L, C, R, SL, SR' ) ]
+ACMOD = [('1+1', 2, 'Ch1, Ch2'),
+         ('1/0', 1, 'C'),
+         ('2/0', 2, 'L, R'),
+         ('3/0', 3, 'L, C, R'),
+         ('2/1', 3, 'L, R, S'),
+         ('3/1', 4, 'L, C, R, S'),
+         ('2/2', 4, 'L, R, SL, SR'),
+         ('3/2', 5, 'L, C, R, SL, SR')]
 
 
 # dsurmod: Dolby surround mode, 2 bits
@@ -100,8 +100,8 @@ ACMOD = [ ( '1+1', 2, 'Ch1, Ch2' ),
 #  byte&0x3e = 0x22        \b, 576 kbit/s
 #  byte&0x3e = 0x24        \b, 640 kbit/s
 
-FRMSIZCOD = [ 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192,
-              224, 256, 320, 384, 448, 512, 576, 640 ]
+FRMSIZCOD = [32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192,
+             224, 256, 320, 384, 448, 512, 576, 640]
 
 class AC3(core.Music):
     def __init__(self,file):

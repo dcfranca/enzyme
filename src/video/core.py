@@ -32,12 +32,12 @@ from ..audio.core import Audio as AudioStream
 
 VIDEOCORE = ['length', 'encoder', 'bitrate', 'samplerate', 'codec', 'format',
              'samplebits', 'width', 'height', 'fps', 'aspect', 'trackno',
-             'fourcc', 'id', 'enabled', 'default', 'codec_private' ]
+             'fourcc', 'id', 'enabled', 'default', 'codec_private']
 
 AVCORE    = ['length', 'encoder', 'trackno', 'trackof', 'copyright', 'product',
              'genre', 'writer', 'producer', 'studio', 'rating', 'actors', 'thumbnail',
              'delay', 'image', 'video', 'audio', 'subtitles', 'chapters', 'software',
-             'summary', 'synopsis', 'season', 'episode', 'series' ]
+             'summary', 'synopsis', 'season', 'episode', 'series']
 
 class VideoStream(Media):
     """

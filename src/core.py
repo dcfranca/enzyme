@@ -29,7 +29,7 @@ import language
 from exceptions import *
 from strutils import str_to_unicode, unicode_to_str
 
-UNPRINTABLE_KEYS = [ 'thumbnail', 'url', 'codec_private' ]
+UNPRINTABLE_KEYS = ['thumbnail', 'url', 'codec_private']
 EXTENSION_DEVICE    = 'device'
 EXTENSION_DIRECTORY = 'directory'
 EXTENSION_STREAM    = 'stream'
@@ -68,7 +68,7 @@ class Media(object):
             # create Media based on dict
             for key, value in hash.items():
                 if isinstance(value, list) and value and isinstance(value[0], dict):
-                    value = [ Media(x) for x in value ]
+                    value = [Media(x) for x in value]
                 self._set(key, value)
             return
 
@@ -298,7 +298,7 @@ class Media(object):
         for k in self._keys:
             value = getattr(self, k, None)
             if isinstance(value, list) and value and isinstance(value[0], Media):
-                value = [ x.convert() for x in value ]
+                value = [x.convert() for x in value]
             result[k] = value
         return result
 
@@ -314,7 +314,7 @@ class Collection(Media):
     """
     Collection of Digial Media like CD, DVD, Directory, Playlist
     """
-    _keys = Media._keys + [ 'id', 'tracks' ]
+    _keys = Media._keys + ['id', 'tracks']
 
     def __init__(self):
         Media.__init__(self)

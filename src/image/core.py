@@ -34,7 +34,7 @@ log = logging.getLogger(__name__)
 
 # attributes for image files
 ATTRIBUTES = ['description', 'people', 'location', 'event', 'width', 'height',
-              'thumbnail','software','hardware', 'dpi', 'city', 'rotation', 'author' ]
+              'thumbnail','software','hardware', 'dpi', 'city', 'rotation', 'author']
 
 
 class BinsParser(xml.sax.ContentHandler):

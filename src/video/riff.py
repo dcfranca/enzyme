@@ -146,7 +146,7 @@ class Riff(core.AVContainer):
     def _parseSTRH(self,t):
         retval = {}
         retval['fccType'] = t[0:4]
-        log.debug("_parseSTRH(%s) : %d bytes" % ( retval['fccType'], len(t)))
+        log.debug("_parseSTRH(%s) : %d bytes" % (retval['fccType'], len(t)))
         if retval['fccType'] != 'auds':
             retval['fccHandler'] = t[4:8]
             v = struct.unpack('<IHHIIIIIIIII',t[8:52])
@@ -189,13 +189,14 @@ class Riff(core.AVContainer):
         fccType = strh['fccType']
         retval = {}
         if fccType == 'auds':
+            v = struct.unpack('<HHHHHH',t[0:12])
             ( retval['wFormatTag'],
               retval['nChannels'],
               retval['nSamplesPerSec'],
               retval['nAvgBytesPerSec'],
               retval['nBlockAlign'],
               retval['nBitsPerSample'],
-            ) = struct.unpack('<HHHHHH',t[0:12])
+            ) = v
             ai = core.AudioStream()
             ai.samplerate = retval['nSamplesPerSec']
             ai.channels = retval['nChannels']
@@ -269,7 +270,7 @@ class Riff(core.AVContainer):
             log.debug("_parseODML: Error")
 
         i += sz - 8
-        return ( retval, i )
+        return (retval, i)
 
 
     def _parseVPRP(self,t):
@@ -296,7 +297,7 @@ class Riff(core.AVContainer):
         retval['FrameAspectRatio'] = r
         if self.video:
             map(lambda v: setattr(v, 'aspect', r), self.video)
-        return ( retval, v[0] )
+        return (retval, v[0])
 
 
     def _parseLISTmovi(self, size, file):
@@ -505,10 +506,10 @@ class Riff(core.AVContainer):
             self.header[key] = value
             if key == 'INFO':
                 self.infoStart = pos
-                self._appendtable( 'AVIINFO', value )
+                self._appendtable('AVIINFO', value)
             elif key == 'MID ':
-                self._appendtable( 'AVIMID', value )
-            elif key in ('hdrl', ):
+                self._appendtable('AVIMID', value)
+            elif key == 'hdrl':
                 # no need to add this info to a table
                 pass
             else:

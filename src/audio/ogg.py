@@ -68,7 +68,7 @@ class Ogg(core.Music):
         h = file.read(4+10+13)
         if h[:4] == 'OggS':
             (serial, pagesequence, checksum, numEntries) = \
-                     struct.unpack( '<14xIIIB', h )
+                     struct.unpack('<14xIIIB', h)
             # skip past numEntries
             file.seek(numEntries,1)
             h = file.read(7)
@@ -124,7 +124,7 @@ class Ogg(core.Music):
             pageSize = 0
             h = h[idx+4:]
             (check, type, granule_position, absPos, serial, pageN, crc, \
-             segs) = struct.unpack( '<BBIIIIIB', h[:23] )
+             segs) = struct.unpack('<BBIIIIIB', h[:23])
             if check != 0:
                 log.debug(h[:10])
                 return

@@ -50,14 +50,14 @@ class PNG(core.Image):
         self.type = 'PNG image'
 
         signature = file.read(8)
-        if ( signature != PNGSIGNATURE ):
+        if signature != PNGSIGNATURE:
             raise ParseError()
 
         self.meta = {}
         while self._readChunk(file):
             pass
         if len(self.meta.keys()):
-            self._appendtable( 'PNGMETA', self.meta )
+            self._appendtable('PNGMETA', self.meta)
         for key, value in self.meta.items():
             if key.startswith('Thumb:') or key == 'Software':
                 self._set(key, value)

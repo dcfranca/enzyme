@@ -258,7 +258,7 @@ class Ogm(core.AVContainer):
 
             if htype[:5] == 'video':
                 sh = header[9:struct.calcsize(STREAM_HEADER_VIDEO)+9]
-                streamheader = struct.unpack( STREAM_HEADER_VIDEO, sh )
+                streamheader = struct.unpack(STREAM_HEADER_VIDEO, sh)
                 vi = core.VideoStream()
                 (type, ssize, timeunit, samplerate, vi.length, buffersize, \
                  vi.bitrate, vi.width, vi.height) = streamheader
@@ -273,7 +273,7 @@ class Ogm(core.AVContainer):
 
             elif htype[:5] == 'audio':
                 sha = header[9:struct.calcsize(STREAM_HEADER_AUDIO)+9]
-                streamheader = struct.unpack( STREAM_HEADER_AUDIO, sha )
+                streamheader = struct.unpack(STREAM_HEADER_AUDIO, sha)
                 ai = core.AudioStream()
                 (type, ssize, timeunit, ai.samplerate, ai.length, buffersize, \
                  ai.bitrate, ai.channels, bloc, ai.bitrate) = streamheader
@@ -293,7 +293,7 @@ class Ogm(core.AVContainer):
 
 
     def _extractHeaderString(self,header):
-        len = struct.unpack( '<I', header[:4] )[0]
+        len = struct.unpack('<I', header[:4])[0]
         try:
             return (len+4,unicode(header[4:4+len], 'utf-8'))
         except (KeyError, IndexError, UnicodeDecodeError):

@@ -49,7 +49,7 @@ cdrom = Extension('kaa/metadata/disc/_cdrom', ['src/disc/cdrommodule.c'])
 
 # check for libdvdread
 ifoparser = Extension('kaa.metadata.disc._ifoparser', ['src/disc/ifomodule.c'],
-                      libraries=[ 'dvdread' ])
+                      libraries=['dvdread'])
 
 try:
     if not ifoparser.check_cc([], '', '-ldvdread'):
@@ -60,17 +60,17 @@ try:
         print 'Warning: libdvdread header file is missing.'
         raise AttributeError()
 
-    ext_modules = [ cdrom, ifoparser ]
+    ext_modules = [cdrom, ifoparser]
 except AttributeError:
     print 'The DVD parser will be disabled'
-    ext_modules = [ cdrom ]
+    ext_modules = [cdrom]
 
 if not cdrom.has_python_h():
     print "---------------------------------------------------------------------"
     print "Python headers not found; please install python development package."
     print "Rom drive support will be unavailable"
     print "---------------------------------------------------------------------"
-    ext_modules = [ ]
+    ext_modules = []
 
 exiv2 = Extension('kaa.metadata.image.exiv2', ['src/image/exiv2.cpp'])
 if exiv2.check_library('exiv2', '0.18'):
@@ -83,7 +83,7 @@ setup(
     license = 'GPL',
     summary = 'Module for retrieving information about media files',
     author = 'Thomas Schueppel, Dirk Meyer, Jason Tackaberry',
-    scripts = [ 'bin/mminfo' ],
+    scripts = ['bin/mminfo'],
     rpminfo = {
         'requires': 'python-kaa-base >= 0.1.2, libdvdread >= 0.9.4',
         'build_requires': 'python-kaa-base >= 0.1.2, libdvdread-devel >= 0.9.4, python-devel >= 2.3.0',

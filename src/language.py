@@ -22,7 +22,7 @@
 
 import re
 
-__all__ = [ 'resolve' ]
+__all__ = ['resolve']
 
 def resolve(code):
     """

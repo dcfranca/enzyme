@@ -301,7 +301,7 @@ class Asf(core.AVContainer):
                 pos+=i
 
             # Set empty strings to None
-            strings = [ x or None for x in strings ]
+            strings = [x or None for x in strings]
             self.title, self.artist, self.copyright, self.caption, rating = strings
 
         elif guid == GUIDS['ASF_Extended_Content_Description_Object']:

@@ -24,7 +24,7 @@ import string
 import re
 import struct
 
-__all__ = [ 'resolve' ]
+__all__ = ['resolve']
 
 def resolve(code):
     """
@@ -47,7 +47,7 @@ def resolve(code):
         elif len(code) == 2:
             code = struct.unpack('H', code)[0]
             return hex(code), TWOCC.get(code, codec)
-        elif len(code) != 4 and len([ x for x in code if x not in string.printable ]) == 0:
+        elif len(code) != 4 and len([x for x in code if x not in string.printable]) == 0:
             # Code is a printable string.
             codec = unicode(code)
 

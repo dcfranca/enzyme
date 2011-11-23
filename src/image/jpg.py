@@ -174,7 +174,7 @@ class JPG(core.Image):
             app = file.read(4)
 
         if len(self.meta.keys()):
-            self._appendtable( 'JPGMETA', self.meta )
+            self._appendtable('JPGMETA', self.meta)
 
         for key, value in self.meta.items():
             if key.startswith('Thumb:') or key == 'Software':

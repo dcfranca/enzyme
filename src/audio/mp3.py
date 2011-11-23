@@ -73,13 +73,13 @@ _bitrates = [
    ]
 
 _samplerates = [
-   [ 11025, 12000,  8000, None], # MPEG-2.5
-   [  None,  None,  None, None], # reserved
-   [ 22050, 24000, 16000, None], # MPEG-2
-   [ 44100, 48000, 32000, None], # MPEG-1
+   [11025, 12000, 8000,  None], # MPEG-2.5
+   [None,  None,  None,  None], # reserved
+   [22050, 24000, 16000, None], # MPEG-2
+   [44100, 48000, 32000, None], # MPEG-1
    ]
 
-_modes = [ "stereo", "joint stereo", "dual channel", "mono" ]
+_modes = ["stereo", "joint stereo", "dual channel", "mono"]
 
 _MP3_HEADER_SEEK_LIMIT = 4096
 

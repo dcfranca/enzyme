@@ -26,9 +26,9 @@ from ..core import Media, MEDIA_AUDIO
 
 AUDIOCORE = ['channels', 'samplerate', 'length', 'encoder', 'codec', 'format',
              'samplebits', 'bitrate', 'fourcc', 'trackno', 'id', 'userdate',
-             'enabled', 'default', 'codec_private' ]
+             'enabled', 'default', 'codec_private']
 
-MUSICCORE = ['trackof', 'album', 'genre', 'discs', 'thumbnail' ]
+MUSICCORE = ['trackof', 'album', 'genre', 'discs', 'thumbnail']
 
 
 class Audio(Media):

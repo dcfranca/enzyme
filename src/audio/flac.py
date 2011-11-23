@@ -106,7 +106,7 @@ class Flac(core.Music):
                 break
 
     def _extractHeaderString(self,header):
-        len = struct.unpack( '<I', header[:4] )[0]
+        len = struct.unpack('<I', header[:4])[0]
         return (len+4,unicode(header[4:4+len], 'utf-8'))
 
 

@@ -120,7 +120,7 @@ def flatten(list):
             if len(val) == 0:
                 del list[i]
             elif i == 'keywords':
-                list[i] = [ x.strip(' \t\0\n\r') for x in val ]
+                list[i] = [x.strip(' \t\0\n\r') for x in val]
             else:
                 list[i] = u' '.join(val).strip()
         return list
