@@ -161,7 +161,7 @@ class Riff(core.AVContainer):
               retval['dwSuggestedBufferSize'],
               retval['dwQuality'],
               retval['dwSampleSize'],
-              retval['rcFrame'], ) = v
+              retval['rcFrame'] ) = v
         else:
             try:
                 v = struct.unpack('<IHHIIIIIIIII',t[8:52])
@@ -176,7 +176,7 @@ class Riff(core.AVContainer):
                   retval['dwSuggestedBufferSize'],
                   retval['dwQuality'],
                   retval['dwSampleSize'],
-                  retval['rcFrame'], ) = v
+                  retval['rcFrame'] ) = v
                 self.delay = float(retval['dwStart']) / \
                              (float(retval['dwRate']) / retval['dwScale'])
             except (KeyError, IndexError, ValueError, ZeroDivisionError):
@@ -216,13 +216,13 @@ class Riff(core.AVContainer):
               retval['biWidth'],
               retval['biHeight'],
               retval['biPlanes'],
-              retval['biBitCount'], ) = v
+              retval['biBitCount'] ) = v
             v = struct.unpack('IIIII',t[20:40])
             ( retval['biSizeImage'],
               retval['biXPelsPerMeter'],
               retval['biYPelsPerMeter'],
               retval['biClrUsed'],
-              retval['biClrImportant'], ) = v
+              retval['biClrImportant'] ) = v
             vi = core.VideoStream()
             vi.codec = t[16:20]
             vi.width = retval['biWidth']
