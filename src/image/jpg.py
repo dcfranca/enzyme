@@ -30,7 +30,6 @@ import time
 import logging
 import cStringIO
 
-# import kaa.metadata.image core
 import core
 import EXIF
 import IPTC

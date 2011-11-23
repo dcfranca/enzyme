@@ -31,7 +31,6 @@ import string
 import logging
 import time
 
-# import kaa.metadata.video core
 import core
 
 # get logging object

@@ -27,7 +27,6 @@ __all__ = ['Parser']
 # python imports
 import time
 
-# import kaa.metadata.image core
 import core
 import exiv2
 

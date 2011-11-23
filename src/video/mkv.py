@@ -29,12 +29,11 @@ from struct import unpack
 import logging
 import re
 from datetime import datetime
-
-# import kaa.metadata.video core
 import core
+from ..exceptions import *
 
 # get logging object
-log = logging.getLogger('metadata')
+log = logging.getLogger(__name__)
 
 # Main IDs for the Matroska streams
 MATROSKA_VIDEO_TRACK              = 0x01
@@ -229,7 +228,7 @@ class EbmlEntity:
         try:
             self.build_entity(inbuf)
         except IndexError:
-            raise core.ParseError()
+            raise ParseError()
         while self.get_id() == MATROSKA_CRC32_ID:
             self.crc_len += self.get_total_len()
             inbuf = inbuf[self.get_total_len():]
@@ -239,8 +238,8 @@ class EbmlEntity:
         self.compute_id(inbuf)
 
         if self.id_len == 0:
-            log.debug("EBML entity not found, bad file format")
-            raise core.ParseError()
+            log.error("EBML entity not found, bad file format")
+            raise ParseError()
 
         self.entity_len, self.len_size = self.compute_len(inbuf[self.id_len:])
         self.entity_data = inbuf[self.get_header_len() : self.get_total_len()]
@@ -379,12 +378,12 @@ class Matroska(core.AVContainer):
         buffer = file.read(2000)
         if len(buffer) == 0:
             # Regular File end
-            raise core.ParseError()
+            raise ParseError()
 
         # Check the Matroska header
         header = EbmlEntity(buffer)
         if header.get_id() != MATROSKA_HEADER_ID:
-            raise core.ParseError()
+            raise ParseError()
 
         log.debug("HEADER ID found %08X" % header.get_id() )
         self.mime = 'application/mkv'
@@ -405,11 +404,11 @@ class Matroska(core.AVContainer):
             for elem in self.process_one_level(segment):
                 if elem.get_id() == MATROSKA_SEEKHEAD_ID:
                     self.process_elem(elem)
-        except core.ParseError:
+        except ParseError:
             pass
 
         if not self.has_idx:
-            log.debug('WARNING: file has no index')
+            log.warning('File has no index')
             self._set('corrupt', True)
 
     def process_elem(self, elem):
@@ -471,7 +470,7 @@ class Matroska(core.AVContainer):
                     buffer = self.file.read(100)
                     try:
                         elem = EbmlEntity(buffer)
-                    except core.ParseError:
+                    except ParseError:
                         continue
 
                     # Fetch all data necessary for this element.
@@ -499,6 +498,8 @@ class Matroska(core.AVContainer):
             yield elem
             index += elem.get_total_len() + elem.get_crc_len()
 
+    def set_track_defaults(self, track):
+        track.language = 'eng'
 
     def process_track(self, track):
         # Collapse generator into a list since we need to iterate over it
@@ -521,6 +522,7 @@ class Matroska(core.AVContainer):
         elif track_type == MATROSKA_SUBTITLES_TRACK:
             log.debug("Subtitle track found")
             track = core.Subtitle()
+            self.set_track_defaults(track)
             track.id = len(self.subtitles)
             self.subtitles.append(track)
             for elem in elements:
@@ -553,6 +555,7 @@ class Matroska(core.AVContainer):
         # Defaults
         track.codec = u'Unknown'
         track.fps = 0
+        self.set_track_defaults(track)
 
         for elem in elements:
             elem_id = elem.get_id()
@@ -610,6 +613,7 @@ class Matroska(core.AVContainer):
     def process_audio_track(self, elements):
         track = core.AudioStream()
         track.codec = u'Unknown'
+        self.set_track_defaults(track)
 
         for elem in elements:
             elem_id = elem.get_id()

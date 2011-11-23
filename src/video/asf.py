@@ -29,9 +29,7 @@ import struct
 import string
 import logging
 
-# import kaa.metadata.video core
 import core
-# import kaa.metadata.audio for asf files without video stream
 import kaa.metadata.audio.core as audiocore
 
 # get logging object

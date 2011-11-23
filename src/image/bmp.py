@@ -28,7 +28,6 @@ __all__ = ['Parser']
 import struct
 import logging
 
-# import kaa.metadata.image core
 import core
 
 # get logging object

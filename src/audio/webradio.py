@@ -29,7 +29,6 @@ import urlparse
 import string
 import urllib
 
-# import kaa.metadata.audio core
 import core
 
 

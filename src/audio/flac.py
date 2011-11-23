@@ -29,7 +29,6 @@ import struct
 import re
 import logging
 
-# import kaa.metadata.audio core
 import core
 
 # get logging object

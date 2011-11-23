@@ -30,7 +30,6 @@ __all__ = ['Parser']
 # python imports
 import logging
 
-# import kaa.metadata.audio core
 import core
 
 # get logging object

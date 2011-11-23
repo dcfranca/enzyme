@@ -27,7 +27,6 @@ __all__ = ['Parser']
 # python imports
 import struct
 
-# import kaa.metadata.audio core
 import core
 
 # http://www.atsc.org/standards/a_52a.pdf

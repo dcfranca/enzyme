@@ -31,7 +31,6 @@ import stat
 import struct
 import logging
 
-# import kaa.metadata.audio core
 import core
 
 # get logging object

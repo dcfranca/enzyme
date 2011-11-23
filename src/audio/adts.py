@@ -26,7 +26,6 @@ __all__ = ['Parser']
 
 import struct
 
-# import kaa.metadata.audio core
 import core
 
 # ADTS Fixed header: these don't change from frame to frame

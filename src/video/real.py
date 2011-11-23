@@ -28,7 +28,6 @@ __all__ = ['Parser']
 import struct
 import logging
 
-# import kaa.metadata.video core
 import core
 
 # http://www.pcisys.net/~melanson/codecs/rmff.htm

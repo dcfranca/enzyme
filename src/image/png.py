@@ -32,7 +32,6 @@ import logging
 # kaa imports
 import kaa
 
-# import kaa.metadata.image core
 import core
 
 # get logging object

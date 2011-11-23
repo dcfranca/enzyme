@@ -30,7 +30,6 @@ import logging
 import StringIO
 import struct
 
-# import kaa.metadata.video core
 import core
 
 # get logging object

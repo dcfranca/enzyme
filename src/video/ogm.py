@@ -31,7 +31,6 @@ import stat
 import os
 import logging
 
-# import kaa.metadata.video core
 import core
 
 # get logging object

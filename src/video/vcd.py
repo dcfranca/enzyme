@@ -27,7 +27,6 @@ __all__ = ['Parser']
 # python imports
 import os
 
-# import kaa.metadata.video core
 import core
 
 class VCDFile(core.Collection):
