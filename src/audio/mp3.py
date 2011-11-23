@@ -24,19 +24,16 @@
 
 __all__ = ['Parser']
 
-# python imports
 import re
 import sys
 import logging
 import struct
-
-from kaa.strutils import str_to_unicode
+from ..strutils import str_to_unicode
 import core
 import ID3 as ID3
-
-# eyeD3 imports
 from eyeD3 import tag as eyeD3_tag
 from eyeD3 import frames as eyeD3_frames
+from ..exceptions import *
 
 
 # get logging object
@@ -98,14 +95,14 @@ class MP3(core.Music):
         self.mime = 'audio/mpeg'
 
         #if not eyeD3_tag.isMp3File(file.name):
-        #   raise core.ParseError()
+        #   raise ParseError()
 
         id3 = None
         try:
             id3 = eyeD3_tag.Mp3AudioFile(file.name)
         except eyeD3_tag.InvalidAudioFormatException:
             # File is not an MP3
-            raise core.ParseError()
+            raise ParseError()
         except eyeD3_tag.TagException:
             # The MP3 tag decoder crashed, assume the file is still
             # MP3 and try to play it anyway
@@ -126,7 +123,7 @@ class MP3(core.Music):
                     # again, not good
                     if not re.compile(r'0*\xFF\xFA\xB0\x04$').search(s):
                         # that's it, it is no mp3 at all
-                        raise core.ParseError()
+                        raise ParseError()
 
         try:
             if id3 and id3.tag:

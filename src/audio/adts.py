@@ -25,8 +25,8 @@
 __all__ = ['Parser']
 
 import struct
-
 import core
+from ..exceptions import *
 
 # ADTS Fixed header: these don't change from frame to frame
 #
@@ -61,10 +61,10 @@ class ADTS(core.Music):
         if not file.name.endswith('aac'):
             # we have a bad detection here, so if the filename does
             # not match, we skip.
-            raise core.ParseError()
+            raise ParseError()
         header = struct.unpack('>7B', file.read(7))
         if header[0] != 255 or (header[1] >> 4) != 15:
-            raise core.ParseError()
+            raise ParseError()
         self.mime = 'audio/aac'
 
 Parser = ADTS

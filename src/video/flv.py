@@ -24,11 +24,10 @@
 
 __all__ = ['Parser']
 
-# python imports
 import sys
 import struct
 import logging
-
+from ..exceptions import *
 import core
 
 # get logging object
@@ -81,7 +80,7 @@ class FlashVideo(core.AVContainer):
         self.type = 'Flash Video'
         data = file.read(13)
         if len(data) < 13 or struct.unpack('>3sBBII', data)[0] != 'FLV':
-            raise core.ParseError()
+            raise ParseError()
 
         for i in range(10):
             if self.audio and self.video:

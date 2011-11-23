@@ -22,7 +22,7 @@
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-from kaa.metadata.core import ParseError, Media, MEDIA_GAME
+from ..core import Media, MEDIA_GAME
 
 class Game(Media):
     media = MEDIA_GAME

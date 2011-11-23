@@ -24,13 +24,12 @@
 
 __all__ = ['Parser']
 
-# python imports
 import os
 import struct
 import string
 import logging
 import time
-
+from ..exceptions import *
 import core
 
 # get logging object
@@ -78,7 +77,7 @@ class Riff(core.AVContainer):
         # read the header
         h = file.read(12)
         if h[:4] != "RIFF" and h[:4] != 'SDSS':
-            raise core.ParseError()
+            raise ParseError()
 
         self.has_idx = False
         self.header = {}
@@ -139,7 +138,7 @@ class Riff(core.AVContainer):
           retval['dwLength'] ) = v
         if retval['dwMicroSecPerFrame'] == 0:
             log.warning("ERROR: Corrupt AVI")
-            raise core.ParseError()
+            raise ParseError()
 
         return retval
 

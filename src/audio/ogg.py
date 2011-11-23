@@ -24,13 +24,12 @@
 
 __all__ = ['Parser']
 
-# python imports
 import re
 import os
 import stat
 import struct
 import logging
-
+from ..exceptions import *
 import core
 
 # get logging object
@@ -46,7 +45,7 @@ class Ogg(core.Music):
         h = file.read(4+1+1+20+1)
         if h[:5] != "OggS\00":
             log.info("Invalid header")
-            raise core.ParseError()
+            raise ParseError()
         if ord(h[5]) != 2:
             log.info("Invalid header type flag (trying to go ahead anyway)")
         self.pageSegCount = ord(h[-1])
@@ -55,7 +54,7 @@ class Ogg(core.Music):
         h = file.read(7)
         if h != VORBIS_PACKET_INFO:
             log.info("Wrong vorbis header type, giving up.")
-            raise core.ParseError()
+            raise ParseError()
 
         # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
         self.mime = 'audio/x-vorbis+ogg'

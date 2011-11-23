@@ -24,10 +24,9 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
 import logging
-
+from ..exceptions import *
 import core
 
 # http://www.pcisys.net/~melanson/codecs/rmff.htm
@@ -46,10 +45,10 @@ class RealVideo(core.AVContainer):
             (object_id,object_size,object_version) = struct.unpack('>4sIH',h)
         except struct.error:
             # EOF.
-            raise core.ParseError()
+            raise ParseError()
 
         if not object_id == '.RMF':
-            raise core.ParseError()
+            raise ParseError()
 
         file_version, num_headers = struct.unpack('>II', file.read(8))
         log.debug("size: %d, ver: %d, headers: %d" % \

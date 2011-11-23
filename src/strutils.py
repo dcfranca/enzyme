@@ -20,7 +20,6 @@
 
 __all__ = ['ENCODING', 'str_to_unicode', 'unicode_to_str']
 
-# python imports
 import locale
 
 # find the correct encoding

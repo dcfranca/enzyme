@@ -24,10 +24,9 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
 import logging
-
+from ..exceptions import *
 import core
 
 # get logging object
@@ -46,12 +45,12 @@ class GIF(core.Image):
             header = struct.unpack('<6sHH', file.read(10))
         except struct.error:
             # EOF.
-            raise core.ParseError()
+            raise ParseError()
 
         gifType, self.width, self.height = header
 
         if not gifType.startswith('GIF'):
-            raise core.ParseError()
+            raise ParseError()
 
         self.type = gifType.lower()
 

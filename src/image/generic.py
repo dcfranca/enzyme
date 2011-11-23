@@ -24,9 +24,7 @@
 
 __all__ = ['Parser']
 
-# python imports
 import time
-
 import core
 import exiv2
 

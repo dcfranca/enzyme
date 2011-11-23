@@ -24,12 +24,11 @@
 
 __all__ = ['Parser']
 
-# python imports
 import os
 import struct
 import logging
 import stat
-
+from ..exceptions import *
 import core
 
 # get logging object
@@ -158,10 +157,10 @@ class MPEG(core.AVContainer):
                         if not self.isMPEG(file, force=True) or \
                            not self.video or not self.audio:
                             # does not look like an mpeg at all
-                            raise core.ParseError()
+                            raise ParseError()
                     else:
                         # no mpeg at all
-                        raise core.ParseError()
+                        raise ParseError()
 
         self.mime = 'video/mpeg'
         if not self.video:

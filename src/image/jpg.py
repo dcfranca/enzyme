@@ -24,12 +24,11 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
 import time
 import logging
 import cStringIO
-
+from ..exceptions import *
 import core
 import EXIF
 import IPTC
@@ -76,7 +75,7 @@ class JPG(core.Image):
         self.type = 'jpeg image'
 
         if file.read(2) != '\xff\xd8':
-            raise core.ParseError()
+            raise ParseError()
 
         file.seek(-2,2)
         if file.read(2) != '\xff\xd9':

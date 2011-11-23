@@ -24,13 +24,12 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
 import re
 import stat
 import os
 import logging
-
+from ..exceptions import *
 import core
 
 # get logging object
@@ -77,7 +76,7 @@ class Ogm(core.AVContainer):
             if granule == None:
                 if i == 0:
                     # oops, bad file
-                    raise core.ParseError()
+                    raise ParseError()
                 break
             elif granule > 0:
                 # ok, file started
@@ -143,7 +142,7 @@ class Ogm(core.AVContainer):
         # must be an audio file.  Raise an exception to cause the
         # factory to fall back to audio.ogg.
         if len(self.video) == 0:
-            raise core.ParseError
+            raise ParseError
 
         # Copy Metadata from tables into the main set of attributes
         for header in self.all_header:
@@ -160,7 +159,7 @@ class Ogm(core.AVContainer):
             return None, None
         if h[:4] != "OggS":
             log.debug("Invalid Ogg")
-            raise core.ParseError()
+            raise ParseError()
 
         version = ord(h[4])
         if version != 0:

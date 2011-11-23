@@ -24,13 +24,12 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
 import string
 import logging
-
+from ..exceptions import *
 import core
-import kaa.metadata.audio.core as audiocore
+import ..audio.core as audiocore
 
 # get logging object
 log = logging.getLogger(__name__)
@@ -115,16 +114,16 @@ class Asf(core.AVContainer):
 
         h = file.read(30)
         if len(h) < 30:
-            raise core.ParseError()
+            raise ParseError()
 
         (guidstr, objsize, objnum, reserved1, \
          reserved2) = struct.unpack('<16sQIBB',h)
         guid = self._parseguid(guidstr)
 
         if (guid != GUIDS['ASF_Header_Object']):
-            raise core.ParseError()
+            raise ParseError()
         if reserved1 != 0x01 or reserved2 != 0x02:
-            raise core.ParseError()
+            raise ParseError()
 
         log.debug("asf header size: %d / %d objects" % (objsize,objnum))
         header = file.read(objsize-30)

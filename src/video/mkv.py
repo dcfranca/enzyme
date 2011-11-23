@@ -24,7 +24,6 @@
 
 __all__ = ['Parser']
 
-# python imports
 from struct import unpack
 import logging
 import re

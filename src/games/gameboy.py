@@ -24,10 +24,8 @@
 
 __all__ = ['Parser']
 
-# python imports
 import logging
-
-# kaa.metadata.games core import
+from ..exceptions import *
 import core
 
 # get logging object
@@ -54,7 +52,7 @@ class Gameboy(core.Game):
             # Compare the Logo Code. All GB Roms have this code.
             file.seek (260)
             if file.read(len(GB_LOGOCODE)) != GB_LOGOCODE:
-                raise core.ParseError()
+                raise ParseError()
 
             # Retrieve the ROM Title
             game_title = file.read(15)
@@ -86,7 +84,7 @@ class Gameboy(core.Game):
 
             # Check that the Fized Value is 0x96, if not then error.
             if file.read(1) != '\x96':
-                raise core.ParseError()
+                raise ParseError()
 
 
 Parser = Gameboy

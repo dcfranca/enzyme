@@ -24,10 +24,9 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
-
 import core
+from ..exceptions import *
 
 # http://www.atsc.org/standards/a_52a.pdf
 # fscod: Sample rate code, 2 bits
@@ -118,7 +117,7 @@ class AC3(core.Music):
             if file.read(2) == '\x0b\x77':
                 break
         else:
-            raise core.ParseError()
+            raise ParseError()
 
         info = struct.unpack('<HBBBB',file.read(6))
         self.samplerate = FSCOD[info[1] >> 6]

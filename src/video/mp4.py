@@ -24,12 +24,11 @@
 
 __all__ = ['Parser']
 
-# python imports
 import zlib
 import logging
 import StringIO
 import struct
-
+from ..exceptions import *
 import core
 
 # get logging object
@@ -175,7 +174,7 @@ class MPEG4(core.AVContainer):
             (size,type) = struct.unpack('>I4s',h)
         except struct.error:
             # EOF.
-            raise core.ParseError()
+            raise ParseError()
 
         if type == 'ftyp':
             # file type information
@@ -198,7 +197,7 @@ class MPEG4(core.AVContainer):
 
         if not type in ('moov', 'wide', 'free'):
             log.debug('invalid header: %r' % type)
-            raise core.ParseError()
+            raise ParseError()
 
         # Extended size
         if size == 1:

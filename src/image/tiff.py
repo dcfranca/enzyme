@@ -24,10 +24,9 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
 import logging
-
+from ..exceptions import *
 import core
 import IPTC
 
@@ -99,7 +98,7 @@ class TIFF(core.Image):
                     else:
                         self.height = offset
         else:
-            raise core.ParseError()
+            raise ParseError()
 
         if iptc:
             self._appendtable('IPTC', iptc)

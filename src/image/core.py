@@ -22,14 +22,12 @@
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-# python imports
 import os
 import sys
 import logging
 import xml.sax
-
-# kaa.metadata imports
-from kaa.metadata.core import ParseError, Media, MEDIA_IMAGE
+from ..core import Media, MEDIA_IMAGE
+from ..exceptions import ParseError
 
 # get logging object
 log = logging.getLogger(__name__)

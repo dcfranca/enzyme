@@ -27,15 +27,14 @@
 
 __all__ = ['Parser']
 
-# python imports
+import struct
 import logging
-
 import core
+from ..exceptions import *
 
 # get logging object
 log = logging.getLogger(__name__)
 
-import struct
 
 FLAGS= CONTAINER, SKIPPER, TAGITEM, IGNORE= [2**_ for _ in xrange(4)]
 
@@ -164,7 +163,7 @@ class Mpeg4Audio(core.Music):
         core.Music.__init__(self)
         tags = M4ATags(file)
         if tags.get('FileType') != 'M4A ':
-            raise core.ParseError()
+            raise ParseError()
 
         self.valid = True
         self.mime = 'audio/mp4'

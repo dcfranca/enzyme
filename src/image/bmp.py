@@ -24,10 +24,9 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
 import logging
-
+from ..exceptions import *
 import core
 
 # get logging object
@@ -46,13 +45,13 @@ class BMP(core.Image):
         try:
             (bfType, bfSize, bfZero, bfOffset, biSize, self.width, self.height) = struct.unpack('<2sIIIIII', file.read(26))
         except struct.error:
-            raise core.ParseError()
+            raise ParseError()
 
         # seek to the end to test length
         file.seek(0, 2)
 
         if bfType != 'BM' or bfSize != file.tell():
-            raise core.ParseError()
+            raise ParseError()
 
 
 Parser = BMP

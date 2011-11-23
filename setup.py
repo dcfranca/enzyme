@@ -27,7 +27,6 @@ VERSION = '0.7.8'
 REQUIRES = ['kaa-base']
 
 
-# python imports
 import sys
 
 if 'pip-egg-info' in sys.argv:

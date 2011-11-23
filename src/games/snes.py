@@ -24,13 +24,11 @@
 
 __all__ = ['Parser']
 
-# python imports
 import logging
 import sys
 from struct import unpack
 from re import match
-
-# kaa.metadata.games core import
+from ..exceptions import *
 import core
 
 # get logging object
@@ -84,7 +82,7 @@ class SNES(core.Game):
 
         else:
             # not detected as rom
-            raise core.ParseError()
+            raise ParseError()
         self.title = romName.strip()
 
 Parser = SNES

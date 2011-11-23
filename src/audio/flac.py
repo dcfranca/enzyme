@@ -24,12 +24,11 @@
 
 __all__ = ['Parser']
 
-# python imports
 import struct
 import re
 import logging
-
 import core
+from ..exceptions import *
 
 # get logging object
 log = logging.getLogger(__name__)
@@ -40,7 +39,7 @@ class Flac(core.Music):
     def __init__(self,file):
         core.Music.__init__(self)
         if file.read(4) != 'fLaC':
-            raise core.ParseError()
+            raise ParseError()
 
         # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
         self.mime = 'audio/flac'

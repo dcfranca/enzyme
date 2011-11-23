@@ -24,9 +24,8 @@
 
 __all__ = ['Parser']
 
-# python imports
 import sndhdr
-
+from ..exceptions import *
 import core
 
 class PCM(core.Music):
@@ -34,12 +33,12 @@ class PCM(core.Music):
         core.Music.__init__(self)
         t = self._what(file)
         if not t:
-            raise core.ParseError()
+            raise ParseError()
         (self.type, self.samplerate, self.channels, self.bitrate, \
          self.samplebits) = t
         if self.bitrate == -1:
             # doesn't look right
-            raise core.ParseError()
+            raise ParseError()
         self.mime = "audio/%s" % self.type
 
     def _what(self,f):

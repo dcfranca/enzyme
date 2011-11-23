@@ -25,11 +25,8 @@
 
 # http://www.ap.org/apserver/userguide/codes.htm
 
-# python imports
 from struct import unpack
-
-# kaa imports
-import kaa
+from ..strutils import str_to_unicode
 
 mapping = {
     'by-line title': 'title',
@@ -173,7 +170,7 @@ def parseiptc(app):
         if intro != 0x1c:
             return flatten(iptc)
         (tag, record, dataset, length) = unpack("!BBBH", data[offset:offset+5])
-        val = kaa.str_to_unicode(data[offset+5:offset+length+5])
+        val = str_to_unicode(data[offset+5:offset+length+5])
         offset += length + 5
         name = c_datasets.get(dataset)
         if not name:

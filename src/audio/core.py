@@ -21,11 +21,8 @@
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-# python imports
 import sys
-
-# kaa imports
-from ..core import ParseError, Media, MEDIA_AUDIO
+from ..core import Media, MEDIA_AUDIO
 
 AUDIOCORE = ['channels', 'samplerate', 'length', 'encoder', 'codec', 'format',
              'samplebits', 'bitrate', 'fourcc', 'trackno', 'id', 'userdate',
