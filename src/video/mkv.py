@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------------
-# mkv.py - Matroska Streaming Video Files
-# -----------------------------------------------------------------------------
-# $Id$
-#
-# -----------------------------------------------------------------------------
 # kaa-Metadata - Media Metadata for Python
-# Copyright (C) 2003-2006 Thomas Schueppel, Dirk Meyer, Jason Tackaberry
 #
-# Maintainer:    Jason Tackaberry <tack@urandom.ca>
+# Copyright (C) 2003-2006 Thomas Schueppel <stain@acm.org>
+# Copyright (C) 2003-2006 Dirk Meyer <dischi@freevo.org>
+# Copyright (C) 2003-2006 Jason Tackaberry <tack@urandom.ca>
 #
 # Please see the file AUTHORS for a complete list of authors.
 #
@@ -26,7 +21,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
-# -----------------------------------------------------------------------------
 
 __all__ = ['Parser']
 
