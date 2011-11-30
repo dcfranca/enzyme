@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 #
+# Copyright (C) 2011 Antoine Bertin <diaoulael@gmail.com>
 # Copyright (C) 2003-2006 Thomas Schueppel <stain@acm.org>
 # Copyright (C) 2003-2006 Dirk Meyer <dischi@freevo.org>
 # Copyright (C) 2003-2006 Jason Tackaberry <tack@urandom.ca>
@@ -24,12 +25,12 @@
 
 __all__ = ['Parser']
 
+from datetime import datetime
+from exceptions import *
 from struct import unpack
+import core
 import logging
 import re
-from datetime import datetime
-import core
-from ..exceptions import *
 
 # get logging object
 log = logging.getLogger(__name__)

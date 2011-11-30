@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 #
 # Copyright (C) 2011 Antoine Bertin <diaoulael@gmail.com>
 # Copyright (C) 2003-2006 Thomas Schueppel <stain@acm.org>
@@ -395,7 +395,7 @@ class Music(AudioStream):
         """
         Correct same data based on specific rules
         """
-        Audio._finalize(self)
+        AudioStream._finalize(self)
         if self.trackof:
             try:
                 # XXX Why is this needed anyway?
@@ -454,27 +454,6 @@ class AVContainer(Media):
         self.video = []
         self.subtitles = []
         self.chapters = []
-
-
-    def _set_url(self, url):
-        """
-        Set the URL of the source
-        """
-        Media._set_url(self, url)
-        #TODO: Use guessit
-        '''
-        if feature_enabled('VIDEO_SERIES_PARSER') and not self.series:
-            # special tv series handling to detect the series and episode
-            # name and number
-            basename = os.path.basename(os.path.splitext(url)[0])
-            match = re.split(feature_config('VIDEO_SERIES_PARSER'), basename)
-            if match and len(match) == 6:
-                try:
-                    self.season, self.episode = int(match[2]), int(match[3])
-                    self.series, self.title = match[1], match[4]
-                except ValueError:
-                    pass
-        '''
 
     def _finalize(self):
         """

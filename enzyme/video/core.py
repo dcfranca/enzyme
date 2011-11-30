@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 #
 # Copyright (C) 2003-2006 Thomas Schueppel <stain@acm.org>
 # Copyright (C) 2003-2006 Dirk Meyer <dischi@freevo.org>
@@ -27,7 +27,7 @@ import os
 from ..core import Media, MEDIA_VIDEO, MEDIA_SUBTITLE, \
      MEDIA_CHAPTER, MEDIA_AV, MEDIA_AUDIO, Collection, Tag, Tags
 from ..exceptions import *
-from ..audio.core import Audio as AudioStream
+from ..core import AudioStream
 
 
 VIDEOCORE = ['length', 'encoder', 'bitrate', 'samplerate', 'codec', 'format',

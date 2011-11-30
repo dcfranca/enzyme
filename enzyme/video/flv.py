@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 # Copyright (C) 2003-2006 Thomas Schueppel, Dirk Meyer
 #
 # First Edition: Dirk Meyer <dischi@freevo.org>

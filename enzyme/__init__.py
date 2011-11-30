@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 #
 # Copyright (C) 2011 Antoine Bertin <diaoulael@gmail.com>
 # Copyright (C) 2003-2006 Thomas Schueppel <stain@acm.org>
@@ -30,8 +30,8 @@ from exceptions import *
 PARSERS = [('video.asf', ['video/asf'], ['asf', 'wmv', 'wma']),
            ('video.flv', ['video/flv'], ['flv']),
            ('mkv', ['video/x-matroska', 'application/mkv'], ['mkv', 'mka', 'webm']),
-           ('video.mp4', ['video/quicktime'], ['mov', 'qt', 'mp4', 'mp4a', '3gp', '3gp2', 'mk2']),
-           ('video.mpeg', ['video/mpeg'], ['mpeg', 'mpg', 'mp4', 'ts']),
+           ('mp4', ['video/quicktime', 'video/mp4'], ['mov', 'qt', 'mp4', 'mp4a', '3gp', '3gp2', 'mk2']),
+           ('mpeg', ['video/mpeg'], ['mpeg', 'mpg', 'mp4', 'ts']),
            ('video.ogm', ['application/ogg'], ['ogm', 'ogg']),
            ('video.real', ['video/real'], ['rm', 'ra', 'ram']),
            ('video.riff', ['video/avi'], ['wav', 'avi'])]
@@ -49,7 +49,7 @@ def parse(path):
             parser_mime = parser_name
         if extension in parser_extensions:
             parser_ext = parser_name
-    parser = parser_ext or parser_mime
+    parser =  parser_mime or parser_ext
     if not parser:
         raise NoParserError()
     mod = __import__(parser, globals=globals(), locals=locals(), fromlist=[], level=-1)

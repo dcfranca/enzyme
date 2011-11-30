@@ -1,4 +1,4 @@
-__title__ = 'parseit'
+__title__ = 'enzyme'
 __description__ = 'Video metadata parser'
 __version__ = '0.1'
 __author__ = 'Antoine Bertin'

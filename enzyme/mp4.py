@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 # Copyright (C) 2003-2007 Thomas Schueppel, Dirk Meyer
 #
 # First Edition: Thomas Schueppel <stain@acm.org>
@@ -28,7 +28,7 @@ import zlib
 import logging
 import StringIO
 import struct
-from ..exceptions import *
+from exceptions import *
 import core
 
 # get logging object
@@ -47,112 +47,112 @@ QTUDTA = {
 }
 
 QTLANGUAGES = {
-    0 : "en",
-    1 : "fr",
-    2 : "de",
-    3 : "it",
-    4 : "nl",
-    5 : "sv",
-    6 : "es",
-    7 : "da",
-    8 : "pt",
-    9 : "no",
-    10 : "he",
-    11 : "ja",
-    12 : "ar",
-    13 : "fi",
-    14 : "el",
-    15 : "is",
-    16 : "mt",
-    17 : "tr",
-    18 : "hr",
-    19 : "Traditional Chinese",
-    20 : "ur",
-    21 : "hi",
-    22 : "th",
-    23 : "ko",
-    24 : "lt",
-    25 : "pl",
-    26 : "hu",
-    27 : "et",
-    28 : "lv",
-    29 : "Lappish",
-    30 : "fo",
-    31 : "Farsi",
-    32 : "ru",
-    33 : "Simplified Chinese",
-    34 : "Flemish",
-    35 : "ga",
-    36 : "sq",
-    37 : "ro",
-    38 : "cs",
-    39 : "sk",
-    40 : "sl",
-    41 : "yi",
-    42 : "sr",
-    43 : "mk",
-    44 : "bg",
-    45 : "uk",
-    46 : "be",
-    47 : "uz",
-    48 : "kk",
-    49 : "az",
-    50 : "AzerbaijanAr",
-    51 : "hy",
-    52 : "ka",
-    53 : "mo",
-    54 : "ky",
-    55 : "tg",
-    56 : "tk",
-    57 : "mn",
-    58 : "MongolianCyr",
-    59 : "ps",
-    60 : "ku",
-    61 : "ks",
-    62 : "sd",
-    63 : "bo",
-    64 : "ne",
-    65 : "sa",
-    66 : "mr",
-    67 : "bn",
-    68 : "as",
-    69 : "gu",
-    70 : "pa",
-    71 : "or",
-    72 : "ml",
-    73 : "kn",
-    74 : "ta",
-    75 : "te",
-    76 : "si",
-    77 : "my",
-    78 : "Khmer",
-    79 : "lo",
-    80 : "vi",
-    81 : "id",
-    82 : "tl",
-    83 : "MalayRoman",
-    84 : "MalayArabic",
-    85 : "am",
-    86 : "ti",
-    87 : "om",
-    88 : "so",
-    89 : "sw",
-    90 : "Ruanda",
-    91 : "Rundi",
-    92 : "Chewa",
-    93 : "mg",
-    94 : "eo",
-    128 : "cy",
-    129 : "eu",
-    130 : "ca",
-    131 : "la",
-    132 : "qu",
-    133 : "gn",
-    134 : "ay",
-    135 : "tt",
-    136 : "ug",
-    137 : "Dzongkha",
-    138 : "JavaneseRom",
+    0: "en",
+    1: "fr",
+    2: "de",
+    3: "it",
+    4: "nl",
+    5: "sv",
+    6: "es",
+    7: "da",
+    8: "pt",
+    9: "no",
+    10: "he",
+    11: "ja",
+    12: "ar",
+    13: "fi",
+    14: "el",
+    15: "is",
+    16: "mt",
+    17: "tr",
+    18: "hr",
+    19: "Traditional Chinese",
+    20: "ur",
+    21: "hi",
+    22: "th",
+    23: "ko",
+    24: "lt",
+    25: "pl",
+    26: "hu",
+    27: "et",
+    28: "lv",
+    29: "Lappish",
+    30: "fo",
+    31: "Farsi",
+    32: "ru",
+    33: "Simplified Chinese",
+    34: "Flemish",
+    35: "ga",
+    36: "sq",
+    37: "ro",
+    38: "cs",
+    39: "sk",
+    40: "sl",
+    41: "yi",
+    42: "sr",
+    43: "mk",
+    44: "bg",
+    45: "uk",
+    46: "be",
+    47: "uz",
+    48: "kk",
+    49: "az",
+    50: "AzerbaijanAr",
+    51: "hy",
+    52: "ka",
+    53: "mo",
+    54: "ky",
+    55: "tg",
+    56: "tk",
+    57: "mn",
+    58: "MongolianCyr",
+    59: "ps",
+    60: "ku",
+    61: "ks",
+    62: "sd",
+    63: "bo",
+    64: "ne",
+    65: "sa",
+    66: "mr",
+    67: "bn",
+    68: "as",
+    69: "gu",
+    70: "pa",
+    71: "or",
+    72: "ml",
+    73: "kn",
+    74: "ta",
+    75: "te",
+    76: "si",
+    77: "my",
+    78: "Khmer",
+    79: "lo",
+    80: "vi",
+    81: "id",
+    82: "tl",
+    83: "MalayRoman",
+    84: "MalayArabic",
+    85: "am",
+    86: "ti",
+    87: "om",
+    88: "so",
+    89: "sw",
+    90: "Ruanda",
+    91: "Rundi",
+    92: "Chewa",
+    93: "mg",
+    94: "eo",
+    128: "cy",
+    129: "eu",
+    130: "ca",
+    131: "la",
+    132: "qu",
+    133: "gn",
+    134: "ay",
+    135: "tt",
+    136: "ug",
+    137: "Dzongkha",
+    138: "JavaneseRom",
 }
 
 class MPEG4(core.AVContainer):
@@ -161,9 +161,9 @@ class MPEG4(core.AVContainer):
     identical to Apple Quicktime and 3GP files. It maps to mp4, mov,
     qt and some other extensions.
     """
-    table_mapping = { 'QTUDTA': QTUDTA }
+    table_mapping = {'QTUDTA': QTUDTA}
 
-    def __init__(self,file):
+    def __init__(self, file):
         core.AVContainer.__init__(self)
         self._references = []
 
@@ -171,7 +171,7 @@ class MPEG4(core.AVContainer):
         self.type = 'Quicktime Video'
         h = file.read(8)
         try:
-            (size,type) = struct.unpack('>I4s',h)
+            (size, type) = struct.unpack('>I4s',h)
         except struct.error:
             # EOF.
             raise ParseError()
@@ -187,13 +187,13 @@ class MPEG4(core.AVContainer):
                 size -= 4
             file.seek(size-8, 1)
             h = file.read(8)
-            (size,type) = struct.unpack('>I4s',h)
+            (size, type) = struct.unpack('>I4s',h)
 
         while type in ['mdat', 'skip']:
             # movie data at the beginning, skip
             file.seek(size-8, 1)
             h = file.read(8)
-            (size,type) = struct.unpack('>I4s',h)
+            (size, type) = struct.unpack('>I4s',h)
 
         if not type in ['moov', 'wide', 'free']:
             log.debug('invalid header: %r' % type)

@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 # Copyright (C) 2011 Antoine Bertin <diaoulael@gmail.com>
 #
-# This file is part of parseit.
+# This file is part of enzyme.
 #
-# parseit is free software; you can redistribute it and/or modify it under
+# enzyme is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# Subliminal is distributed in the hope that it will be useful,
+# enzyme is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
@@ -20,22 +20,19 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import sys
-import os
-import unittest
+import datetime
+import enzyme
 import logging
 import os
-import datetime
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'parseit')))
-import parseit
-
+import unittest
 
 # Set up logging
-logging.getLogger('parseit').setLevel(logging.DEBUG)
+logging.basicConfig()
+logging.getLogger('enzyme*').setLevel(logging.DEBUG)
 
 # matroska_test_w1_1 path
 matroska_test_path = os.path.abspath(os.path.join('files', 'matroska_test_w1_1'))
+mp4_test_path = os.path.abspath('files')
 
 
 class MKVTestCase(unittest.TestCase):
@@ -43,14 +40,14 @@ class MKVTestCase(unittest.TestCase):
              'test_datetime', 'test_length', 'test_tags', 'test_video', 'test_audio', 'test_subtitles']
 
     def setUp(self):
-        self.p1 = parseit.parse(os.path.join(matroska_test_path, u'test1.mkv'))
-        self.p2 = parseit.parse(os.path.join(matroska_test_path, u'test2.mkv'))
-        self.p3 = parseit.parse(os.path.join(matroska_test_path, u'test3.mkv'))
-        self.p4 = parseit.parse(os.path.join(matroska_test_path, u'test4.mkv'))
-        self.p5 = parseit.parse(os.path.join(matroska_test_path, u'test5.mkv'))
-        self.p6 = parseit.parse(os.path.join(matroska_test_path, u'test6.mkv'))
-        self.p7 = parseit.parse(os.path.join(matroska_test_path, u'test7.mkv'))
-        self.p8 = parseit.parse(os.path.join(matroska_test_path, u'test8.mkv'))
+        self.p1 = enzyme.parse(os.path.join(matroska_test_path, u'test1.mkv'))
+        self.p2 = enzyme.parse(os.path.join(matroska_test_path, u'test2.mkv'))
+        self.p3 = enzyme.parse(os.path.join(matroska_test_path, u'test3.mkv'))
+        self.p4 = enzyme.parse(os.path.join(matroska_test_path, u'test4.mkv'))
+        self.p5 = enzyme.parse(os.path.join(matroska_test_path, u'test5.mkv'))
+        self.p6 = enzyme.parse(os.path.join(matroska_test_path, u'test6.mkv'))
+        self.p7 = enzyme.parse(os.path.join(matroska_test_path, u'test7.mkv'))
+        self.p8 = enzyme.parse(os.path.join(matroska_test_path, u'test8.mkv'))
 
     def test_title(self):
         self.assertTrue(self.p1.title == 'Big Buck Bunny - test 1')
@@ -335,7 +332,71 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(len(self.p8.subtitles) == 0)
 
 
+class MP4TestCase(unittest.TestCase):
+    tests = ['test_type_mime_media', 'test_timestamp', 
+             'test_length', 'test_video', 'test_audio']
+
+    def setUp(self):
+        self.p1 = enzyme.parse(os.path.join(mp4_test_path, u'sample_mpeg4.mp4'))
+        self.p2 = enzyme.parse(os.path.join(mp4_test_path, u'Quality Sample.mp4'))
+        self.p3 = enzyme.parse(os.path.join(mp4_test_path, u'sample.3gp'))
+
+    def test_type_mime_media(self):
+        self.assertTrue(self.p1.type == 'MPEG-4 Video')
+        self.assertTrue(self.p1.mime == 'video/mp4')
+        self.assertTrue(self.p1.media == 'MEDIA_AV')
+        self.assertTrue(self.p2.type == 'MPEG-4 Video')
+        self.assertTrue(self.p2.mime == 'video/mp4')
+        self.assertTrue(self.p2.media == 'MEDIA_AV')
+        self.assertTrue(self.p3.type == 'MPEG-4 Video')
+        self.assertTrue(self.p3.mime == 'video/mp4')
+        self.assertTrue(self.p3.media == 'MEDIA_AV')
+
+    def test_timestamp(self):
+        self.assertTrue(self.p1.timestamp == 1130521606)
+        self.assertTrue(self.p2.timestamp == 1278452391)
+        self.assertTrue(self.p3.timestamp == 1130521000)
+
+    def test_length(self):
+        self.assertTrue(self.p1.length == 4)
+        self.assertTrue(self.p2.length == 14)
+        self.assertTrue(self.p3.length == 5)
+
+    def test_video(self):
+        self.assertTrue(self.p1.video[0].media == 'MEDIA_VIDEO')
+        self.assertTrue(self.p1.video[0].codec == 'mp4v')
+        self.assertTrue(self.p1.video[0].width == 190)
+        self.assertTrue(self.p1.video[0].height == 240)
+        self.assertTrue(self.p1.video[0].id == 2)
+        self.assertTrue(self.p2.video[0].media == 'MEDIA_VIDEO')
+        self.assertTrue(self.p2.video[0].codec == 'avc1')
+        self.assertTrue(self.p2.video[0].length == 13)
+        self.assertTrue(self.p2.video[0].width == 1280)
+        self.assertTrue(self.p2.video[0].height == 720)
+        self.assertTrue(self.p2.video[0].id == 1)
+        self.assertTrue(self.p3.video[0].media == 'MEDIA_VIDEO')
+        self.assertTrue(self.p3.video[0].codec == 'mp4v')
+        self.assertTrue(self.p3.video[0].length == 4)
+        self.assertTrue(self.p3.video[0].width == 176)
+        self.assertTrue(self.p3.video[0].height == 144)
+        self.assertTrue(self.p3.video[0].id == 2)
+
+    def test_audio(self):
+        self.assertTrue(self.p1.audio[0].media == 'MEDIA_AUDIO')
+        self.assertTrue(self.p1.audio[0].length == 4)
+        self.assertTrue(self.p1.audio[0].codec == "mp4a")
+        self.assertTrue(self.p1.audio[0].id == 1)
+        self.assertTrue(self.p2.audio[0].media == 'MEDIA_AUDIO')
+        self.assertTrue(self.p2.audio[0].length == 14)
+        self.assertTrue(self.p2.audio[0].codec == "mp4a")
+        self.assertTrue(self.p2.audio[0].id == 2)
+        self.assertTrue(self.p3.audio[0].media == 'MEDIA_AUDIO')
+        self.assertTrue(self.p3.audio[0].length == 5)
+        self.assertTrue(self.p3.audio[0].codec == "samr")
+        self.assertTrue(self.p3.audio[0].id == 1)
+
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-    suite.addTests(map(MKVTestCase, MKVTestCase.tests))
+#    suite.addTests(map(MKVTestCase, MKVTestCase.tests))
+    suite.addTests(map(MP4TestCase, MP4TestCase.tests))
     unittest.TextTestRunner(verbosity=2).run(suite)

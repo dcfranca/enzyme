@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 # Copyright (c) 2011 Antoine Bertin <diaoulael@gmail.com>
 #
-# This file is part of parseit.
+# This file is part of enzyme.
 #
-# parseit is free software; you can redistribute it and/or modify it under
+# enzyme is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# Subliminal is distributed in the hope that it will be useful,
+# enzyme is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
@@ -20,13 +20,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from enzyme import infos
 from setuptools import setup
-execfile('parseit/infos.py')
 
-setup(name=__title__,
-    version=__version__,
-    license=__license__,
-    description=__description__,
+setup(name=infos.__title__,
+    version=infos.__version__,
+    license=infos.__license__,
+    description=infos.__description__,
     long_description=open('README.md').read() + '\n\n' +
                      open('NEWS.md').read(),
     classifiers=['Development Status :: 4 - Beta',
@@ -38,8 +38,8 @@ setup(name=__title__,
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Multimedia :: Video'],
     keywords='video parse metadata library',
-    author=__author__,
-    author_email=__email__,
-    url='https://github.com/Diaoul/parseit',
-    packages=['parseit'],
-    py_modules=['parseit'])
+    author=infos.__author__,
+    author_email=infos.__email__,
+    url='https://github.com/Diaoul/enzyme',
+    packages=['enzyme'],
+    py_modules=['enzyme'])

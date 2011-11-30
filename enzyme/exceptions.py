@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# parseit - Video metadata parser
+# enzyme - Video metadata parser
 #
 # Copyright (C) 2011 Antoine Bertin <diaoulael@gmail.com>
 #
