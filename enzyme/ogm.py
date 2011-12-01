@@ -29,7 +29,7 @@ import re
 import stat
 import os
 import logging
-from ..exceptions import *
+from exceptions import *
 import core
 
 # get logging object

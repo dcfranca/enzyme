@@ -29,7 +29,7 @@ import struct
 import string
 import logging
 import time
-from ..exceptions import *
+from exceptions import *
 import core
 
 # get logging object

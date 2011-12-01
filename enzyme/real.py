@@ -26,7 +26,7 @@ __all__ = ['Parser']
 
 import struct
 import logging
-from ..exceptions import *
+from exceptions import *
 import core
 
 # http://www.pcisys.net/~melanson/codecs/rmff.htm

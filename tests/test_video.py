@@ -340,6 +340,7 @@ class MP4TestCase(unittest.TestCase):
         self.p1 = enzyme.parse(os.path.join(mp4_test_path, u'sample_mpeg4.mp4'))
         self.p2 = enzyme.parse(os.path.join(mp4_test_path, u'Quality Sample.mp4'))
         self.p3 = enzyme.parse(os.path.join(mp4_test_path, u'sample.3gp'))
+        self.p4 = enzyme.parse(os.path.join(mp4_test_path, u'sample_3GPP2.3g2'))
 
     def test_type_mime_media(self):
         self.assertTrue(self.p1.type == 'MPEG-4 Video')
@@ -351,16 +352,21 @@ class MP4TestCase(unittest.TestCase):
         self.assertTrue(self.p3.type == 'MPEG-4 Video')
         self.assertTrue(self.p3.mime == 'video/mp4')
         self.assertTrue(self.p3.media == 'MEDIA_AV')
+        self.assertTrue(self.p4.type == 'MPEG-4 Video')
+        self.assertTrue(self.p4.mime == 'video/mp4')
+        self.assertTrue(self.p4.media == 'MEDIA_AV')
 
     def test_timestamp(self):
         self.assertTrue(self.p1.timestamp == 1130521606)
         self.assertTrue(self.p2.timestamp == 1278452391)
         self.assertTrue(self.p3.timestamp == 1130521000)
+        self.assertTrue(self.p4.timestamp == 1130521775)
 
     def test_length(self):
         self.assertTrue(self.p1.length == 4)
         self.assertTrue(self.p2.length == 14)
         self.assertTrue(self.p3.length == 5)
+        self.assertTrue(self.p4.length == 5)
 
     def test_video(self):
         self.assertTrue(self.p1.video[0].media == 'MEDIA_VIDEO')
@@ -380,6 +386,12 @@ class MP4TestCase(unittest.TestCase):
         self.assertTrue(self.p3.video[0].width == 176)
         self.assertTrue(self.p3.video[0].height == 144)
         self.assertTrue(self.p3.video[0].id == 2)
+        self.assertTrue(self.p4.video[0].media == 'MEDIA_VIDEO')
+        self.assertTrue(self.p4.video[0].codec == 'mp4v')
+        self.assertTrue(self.p4.video[0].length == 4)
+        self.assertTrue(self.p4.video[0].width == 176)
+        self.assertTrue(self.p4.video[0].height == 144)
+        self.assertTrue(self.p4.video[0].id == 2)
 
     def test_audio(self):
         self.assertTrue(self.p1.audio[0].media == 'MEDIA_AUDIO')
@@ -394,9 +406,55 @@ class MP4TestCase(unittest.TestCase):
         self.assertTrue(self.p3.audio[0].length == 5)
         self.assertTrue(self.p3.audio[0].codec == "samr")
         self.assertTrue(self.p3.audio[0].id == 1)
+        self.assertTrue(self.p4.audio[0].media == 'MEDIA_AUDIO')
+        self.assertTrue(self.p4.audio[0].length == 5)
+        self.assertTrue(self.p4.audio[0].codec == "samr")
+        self.assertTrue(self.p4.audio[0].id == 1)
+
+
+class ASFTestCase(unittest.TestCase):
+    tests = ['test_type_mime_media', 'test_timestamp', 
+             'test_length', 'test_video', 'test_audio']
+
+    def setUp(self):
+        self.p1 = enzyme.parse(os.path.join(mp4_test_path, u'niceday.asf'))
+
+    def test_type_mime_media(self):
+        print self.p1
+        self.assertTrue(self.p1.type == 'asf format')
+        self.assertTrue(self.p1.mime == 'video/x-ms-asf')
+        self.assertTrue(self.p1.media == 'MEDIA_AV')
+
+    def test_copyright(self):
+        self.assertTrue(self.p1.copyright == 'Fx Sound and Magic')
+
+    def test_length(self):
+        self.assertTrue(self.p1.length == 54.814)
+
+    def test_video(self):
+        self.assertTrue(self.p1.video[0].media == 'MEDIA_VIDEO')
+        self.assertTrue(self.p1.video[0].language == 'en-us')
+        self.assertTrue(self.p1.video[0].bitrate == 250000)
+        self.assertTrue(self.p1.video[0].codec == 'WMV3')
+        self.assertTrue(self.p1.video[0].width == 320)
+        self.assertTrue(self.p1.video[0].height == 240)
+        self.assertTrue(self.p1.video[0].fps == 29.97000002997)
+        self.assertTrue(self.p1.video[0].id == 2)
+
+    def test_audio(self):
+        self.assertTrue(self.p1.audio[0].language == 'en-us')
+        self.assertTrue(self.p1.audio[0].media == 'MEDIA_AUDIO')
+        self.assertTrue(self.p1.audio[0].channels == 2)
+        self.assertTrue(self.p1.audio[0].samplerate == 44100)
+        self.assertTrue(self.p1.audio[0].codec == 353)
+        self.assertTrue(self.p1.audio[0].samplebits == 16)
+        self.assertTrue(self.p1.audio[0].bitrate == 64040)
+        self.assertTrue(self.p1.audio[0].id == 1)
+
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-#    suite.addTests(map(MKVTestCase, MKVTestCase.tests))
+    suite.addTests(map(MKVTestCase, MKVTestCase.tests))
     suite.addTests(map(MP4TestCase, MP4TestCase.tests))
+    suite.addTests(map(ASFTestCase, ASFTestCase.tests))
     unittest.TextTestRunner(verbosity=2).run(suite)

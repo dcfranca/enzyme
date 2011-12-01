@@ -24,11 +24,10 @@
 
 __all__ = ['Parser']
 
-import sys
-import struct
-import logging
-from ..exceptions import *
+from exceptions import *
 import core
+import logging
+import struct
 
 # get logging object
 log = logging.getLogger(__name__)

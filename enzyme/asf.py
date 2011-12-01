@@ -27,9 +27,8 @@ __all__ = ['Parser']
 import struct
 import string
 import logging
-from ..exceptions import *
+from exceptions import *
 import core
-import ..audio.core as audiocore
 
 # get logging object
 log = logging.getLogger(__name__)
@@ -367,12 +366,12 @@ class Asf(core.AVContainer):
         return r
 
 
-class AsfAudio(audiocore.Audio):
+class AsfAudio(core.AudioStream):
     """
     ASF audio parser for wma files.
     """
     def __init__(self):
-        audiocore.Audio.__init__(self)
+        core.AudioStream.__init__(self)
         self.mime = 'audio/x-ms-asf'
         self.type = 'asf format'
 

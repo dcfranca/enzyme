@@ -27,14 +27,14 @@ import os
 import sys
 from exceptions import *
 
-PARSERS = [('video.asf', ['video/asf'], ['asf', 'wmv', 'wma']),
-           ('video.flv', ['video/flv'], ['flv']),
+PARSERS = [('asf', ['video/asf'], ['asf', 'wmv', 'wma']),
+           ('flv', ['video/flv'], ['flv']),
            ('mkv', ['video/x-matroska', 'application/mkv'], ['mkv', 'mka', 'webm']),
-           ('mp4', ['video/quicktime', 'video/mp4'], ['mov', 'qt', 'mp4', 'mp4a', '3gp', '3gp2', 'mk2']),
-           ('mpeg', ['video/mpeg'], ['mpeg', 'mpg', 'mp4', 'ts']),
-           ('video.ogm', ['application/ogg'], ['ogm', 'ogg']),
-           ('video.real', ['video/real'], ['rm', 'ra', 'ram']),
-           ('video.riff', ['video/avi'], ['wav', 'avi'])]
+           ('mp4', ['video/quicktime', 'video/mp4'], ['mov', 'qt', 'mp4', 'mp4a', '3gp', '3gp2', '3g2', 'mk2']),
+           #('mpeg', ['video/mpeg'], ['mpeg', 'mpg', 'mp4', 'ts']),
+           ('ogm', ['application/ogg'], ['ogm', 'ogg']),
+           ('real', ['video/real'], ['rm', 'ra', 'ram']),
+           ('riff', ['video/avi'], ['wav', 'avi'])]
 
 
 def parse(path):
