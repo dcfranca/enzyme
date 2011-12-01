@@ -413,8 +413,7 @@ class MP4TestCase(unittest.TestCase):
 
 
 class ASFTestCase(unittest.TestCase):
-    tests = ['test_type_mime_media', 'test_timestamp', 
-             'test_length', 'test_video', 'test_audio']
+    tests = ['test_type_mime_media', 'test_copyright', 'test_length', 'test_video', 'test_audio']
 
     def setUp(self):
         self.p1 = enzyme.parse(os.path.join(mp4_test_path, u'niceday.asf'))
@@ -452,9 +451,36 @@ class ASFTestCase(unittest.TestCase):
         self.assertTrue(self.p1.audio[0].id == 1)
 
 
+class FLVTestCase(unittest.TestCase):
+    tests = ['test_type_mime_media', 'test_length', 'test_video', 'test_audio']
+
+    def setUp(self):
+        self.p1 = enzyme.parse(os.path.join(mp4_test_path, u'20051210-w50s.flv'))
+
+    def test_type_mime_media(self):
+        print self.p1
+        self.assertTrue(self.p1.type == 'Flash Video')
+        self.assertTrue(self.p1.mime == 'video/flv')
+        self.assertTrue(self.p1.media == 'MEDIA_AV')
+
+    def test_length(self):
+        self.assertTrue(self.p1.length == 16.92)
+
+    def test_video(self):
+        self.assertTrue(self.p1.video[0].media == 'MEDIA_VIDEO')
+        self.assertTrue(self.p1.video[0].codec == 'VP60')
+
+    def test_audio(self):
+        self.assertTrue(self.p1.audio[0].media == 'MEDIA_AUDIO')
+        self.assertTrue(self.p1.audio[0].channels == 2)
+        self.assertTrue(self.p1.audio[0].samplerate == 22050)
+        self.assertTrue(self.p1.audio[0].codec == 85)
+
+
 if __name__ == '__main__':
     suite = unittest.TestSuite()
     suite.addTests(map(MKVTestCase, MKVTestCase.tests))
     suite.addTests(map(MP4TestCase, MP4TestCase.tests))
     suite.addTests(map(ASFTestCase, ASFTestCase.tests))
+    suite.addTests(map(FLVTestCase, FLVTestCase.tests))
     unittest.TextTestRunner(verbosity=2).run(suite)
