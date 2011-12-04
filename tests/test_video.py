@@ -86,14 +86,7 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p6.mime == 'video/x-matroska')
         self.assertTrue(self.p7.mime == 'video/x-matroska')
         self.assertTrue(self.p8.mime == 'video/x-matroska')
-        self.assertTrue(self.p1.media == 'MEDIA_AV')
-        self.assertTrue(self.p2.media == 'MEDIA_AV')
-        self.assertTrue(self.p3.media == 'MEDIA_AV')
         #self.assertTrue(self.p4.media is None)
-        self.assertTrue(self.p5.media == 'MEDIA_AV')
-        self.assertTrue(self.p6.media == 'MEDIA_AV')
-        self.assertTrue(self.p7.media == 'MEDIA_AV')
-        self.assertTrue(self.p8.media == 'MEDIA_AV')
 
     def test_timestamp(self):
         self.assertTrue(self.p1.timestamp == 1282375383)
@@ -155,7 +148,6 @@ class MKVTestCase(unittest.TestCase):
 
     def test_video(self):
         self.assertTrue(self.p1.video[0].language == 'und')
-        self.assertTrue(self.p1.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p1.video[0].codec == 'MP42')
         self.assertTrue(self.p1.video[0].width == 854)
         self.assertTrue(self.p1.video[0].height == 480)
@@ -164,7 +156,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p1.video[0].id == 0)
         
         self.assertTrue(self.p2.video[0].language == 'und')
-        self.assertTrue(self.p2.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p2.video[0].codec == 'AVC1')
         self.assertTrue(self.p2.video[0].width == 1024)
         self.assertTrue(self.p2.video[0].height == 576)
@@ -173,7 +164,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p2.video[0].id == 0)
         
         self.assertTrue(self.p3.video[0].language == 'und')
-        self.assertTrue(self.p3.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p3.video[0].codec == 'AVC1')
         self.assertTrue(self.p3.video[0].width == 1024)
         self.assertTrue(self.p3.video[0].height == 576)
@@ -182,7 +172,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p3.video[0].id == 0)
         
         self.assertTrue(self.p5.video[0].language == 'und')
-        self.assertTrue(self.p5.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p5.video[0].codec == 'AVC1')
         self.assertTrue(self.p5.video[0].width == 1024)
         self.assertTrue(self.p5.video[0].height == 576)
@@ -192,7 +181,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p5.video[0].id == 0)
         
         self.assertTrue(self.p6.video[0].language == 'und')
-        self.assertTrue(self.p6.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p6.video[0].codec == 'MP42')
         self.assertTrue(self.p6.video[0].width == 854)
         self.assertTrue(self.p6.video[0].height == 480)
@@ -202,7 +190,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p6.video[0].default == False)
         
         self.assertTrue(self.p7.video[0].language == 'und')
-        self.assertTrue(self.p7.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p7.video[0].codec == 'AVC1')
         self.assertTrue(self.p7.video[0].width == 1024)
         self.assertTrue(self.p7.video[0].height == 576)
@@ -212,7 +199,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p7.video[0].default == False)
         
         self.assertTrue(self.p8.video[0].language == 'und')
-        self.assertTrue(self.p8.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p8.video[0].codec == 'AVC1')
         self.assertTrue(self.p8.video[0].width == 1024)
         self.assertTrue(self.p8.video[0].height == 576)
@@ -223,7 +209,6 @@ class MKVTestCase(unittest.TestCase):
 
     def test_audio(self):
         self.assertTrue(self.p1.audio[0].language == 'und')
-        self.assertTrue(self.p1.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p1.audio[0].channels == 2)
         self.assertTrue(self.p1.audio[0].samplerate == 48000.0)
         self.assertTrue(self.p1.audio[0].codec == 85)
@@ -231,7 +216,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p1.audio[0].id == 0)
         
         self.assertTrue(self.p2.audio[0].language == 'und')
-        self.assertTrue(self.p2.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p2.audio[0].channels == 2)
         self.assertTrue(self.p2.audio[0].samplerate == 48000.0)
         self.assertTrue(self.p2.audio[0].codec == 255)
@@ -239,7 +223,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p2.audio[0].id == 0)
         
         self.assertTrue(self.p3.audio[0].language == 'eng')
-        self.assertTrue(self.p3.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p3.audio[0].channels == 2)
         self.assertTrue(self.p3.audio[0].samplerate == 48000.0)
         self.assertTrue(self.p3.audio[0].codec == 85)
@@ -247,7 +230,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p3.audio[0].id == 0)
         
         self.assertTrue(self.p5.audio[0].language == 'und')
-        self.assertTrue(self.p5.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p5.audio[0].channels == 2)
         self.assertTrue(self.p5.audio[0].samplerate == 48000.0)
         self.assertTrue(self.p5.audio[0].codec == 255)
@@ -255,14 +237,12 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p5.audio[0].id == 0)
         self.assertTrue(self.p5.audio[1].language == 'eng')
         self.assertTrue(self.p5.audio[1].title == 'Commentary')
-        self.assertTrue(self.p5.audio[1].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p5.audio[1].samplerate == 22050.0)
         self.assertTrue(self.p5.audio[1].codec == 255)
         self.assertTrue(self.p5.audio[1].trackno == 10)
         self.assertTrue(self.p5.audio[1].id == 1)
         
         self.assertTrue(self.p6.video[0].language == 'und')
-        self.assertTrue(self.p6.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p6.video[0].codec == 'MP42')
         self.assertTrue(self.p6.video[0].width == 854)
         self.assertTrue(self.p6.video[0].height == 480)
@@ -272,7 +252,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p6.video[0].default == False)
         
         self.assertTrue(self.p7.video[0].language == 'und')
-        self.assertTrue(self.p7.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p7.video[0].codec == 'AVC1')
         self.assertTrue(self.p7.video[0].width == 1024)
         self.assertTrue(self.p7.video[0].height == 576)
@@ -282,7 +261,6 @@ class MKVTestCase(unittest.TestCase):
         self.assertTrue(self.p7.video[0].default == False)
         
         self.assertTrue(self.p8.video[0].language == 'und')
-        self.assertTrue(self.p8.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p8.video[0].codec == 'AVC1')
         self.assertTrue(self.p8.video[0].width == 1024)
         self.assertTrue(self.p8.video[0].height == 576)
@@ -345,16 +323,12 @@ class MP4TestCase(unittest.TestCase):
     def test_type_mime_media(self):
         self.assertTrue(self.p1.type == 'MPEG-4 Video')
         self.assertTrue(self.p1.mime == 'video/mp4')
-        self.assertTrue(self.p1.media == 'MEDIA_AV')
         self.assertTrue(self.p2.type == 'MPEG-4 Video')
         self.assertTrue(self.p2.mime == 'video/mp4')
-        self.assertTrue(self.p2.media == 'MEDIA_AV')
         self.assertTrue(self.p3.type == 'MPEG-4 Video')
         self.assertTrue(self.p3.mime == 'video/mp4')
-        self.assertTrue(self.p3.media == 'MEDIA_AV')
         self.assertTrue(self.p4.type == 'MPEG-4 Video')
         self.assertTrue(self.p4.mime == 'video/mp4')
-        self.assertTrue(self.p4.media == 'MEDIA_AV')
 
     def test_timestamp(self):
         self.assertTrue(self.p1.timestamp == 1130521606)
@@ -369,24 +343,20 @@ class MP4TestCase(unittest.TestCase):
         self.assertTrue(self.p4.length == 5)
 
     def test_video(self):
-        self.assertTrue(self.p1.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p1.video[0].codec == 'mp4v')
         self.assertTrue(self.p1.video[0].width == 190)
         self.assertTrue(self.p1.video[0].height == 240)
         self.assertTrue(self.p1.video[0].id == 2)
-        self.assertTrue(self.p2.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p2.video[0].codec == 'avc1')
         self.assertTrue(self.p2.video[0].length == 13)
         self.assertTrue(self.p2.video[0].width == 1280)
         self.assertTrue(self.p2.video[0].height == 720)
         self.assertTrue(self.p2.video[0].id == 1)
-        self.assertTrue(self.p3.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p3.video[0].codec == 'mp4v')
         self.assertTrue(self.p3.video[0].length == 4)
         self.assertTrue(self.p3.video[0].width == 176)
         self.assertTrue(self.p3.video[0].height == 144)
         self.assertTrue(self.p3.video[0].id == 2)
-        self.assertTrue(self.p4.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p4.video[0].codec == 'mp4v')
         self.assertTrue(self.p4.video[0].length == 4)
         self.assertTrue(self.p4.video[0].width == 176)
@@ -394,19 +364,15 @@ class MP4TestCase(unittest.TestCase):
         self.assertTrue(self.p4.video[0].id == 2)
 
     def test_audio(self):
-        self.assertTrue(self.p1.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p1.audio[0].length == 4)
         self.assertTrue(self.p1.audio[0].codec == "mp4a")
         self.assertTrue(self.p1.audio[0].id == 1)
-        self.assertTrue(self.p2.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p2.audio[0].length == 14)
         self.assertTrue(self.p2.audio[0].codec == "mp4a")
         self.assertTrue(self.p2.audio[0].id == 2)
-        self.assertTrue(self.p3.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p3.audio[0].length == 5)
         self.assertTrue(self.p3.audio[0].codec == "samr")
         self.assertTrue(self.p3.audio[0].id == 1)
-        self.assertTrue(self.p4.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p4.audio[0].length == 5)
         self.assertTrue(self.p4.audio[0].codec == "samr")
         self.assertTrue(self.p4.audio[0].id == 1)
@@ -422,7 +388,6 @@ class ASFTestCase(unittest.TestCase):
         print self.p1
         self.assertTrue(self.p1.type == 'asf format')
         self.assertTrue(self.p1.mime == 'video/x-ms-asf')
-        self.assertTrue(self.p1.media == 'MEDIA_AV')
 
     def test_copyright(self):
         self.assertTrue(self.p1.copyright == 'Fx Sound and Magic')
@@ -431,7 +396,6 @@ class ASFTestCase(unittest.TestCase):
         self.assertTrue(self.p1.length == 54.814)
 
     def test_video(self):
-        self.assertTrue(self.p1.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p1.video[0].language == 'en-us')
         self.assertTrue(self.p1.video[0].bitrate == 250000)
         self.assertTrue(self.p1.video[0].codec == 'WMV3')
@@ -442,7 +406,6 @@ class ASFTestCase(unittest.TestCase):
 
     def test_audio(self):
         self.assertTrue(self.p1.audio[0].language == 'en-us')
-        self.assertTrue(self.p1.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p1.audio[0].channels == 2)
         self.assertTrue(self.p1.audio[0].samplerate == 44100)
         self.assertTrue(self.p1.audio[0].codec == 353)
@@ -461,17 +424,14 @@ class FLVTestCase(unittest.TestCase):
         print self.p1
         self.assertTrue(self.p1.type == 'Flash Video')
         self.assertTrue(self.p1.mime == 'video/flv')
-        self.assertTrue(self.p1.media == 'MEDIA_AV')
 
     def test_length(self):
         self.assertTrue(self.p1.length == 16.92)
 
     def test_video(self):
-        self.assertTrue(self.p1.video[0].media == 'MEDIA_VIDEO')
         self.assertTrue(self.p1.video[0].codec == 'VP60')
 
     def test_audio(self):
-        self.assertTrue(self.p1.audio[0].media == 'MEDIA_AUDIO')
         self.assertTrue(self.p1.audio[0].channels == 2)
         self.assertTrue(self.p1.audio[0].samplerate == 22050)
         self.assertTrue(self.p1.audio[0].codec == 85)
