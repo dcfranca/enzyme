@@ -367,8 +367,6 @@ class Matroska(core.AVContainer):
     Matroska video and audio parser. If at least one video stream is
     detected it will set the type to MEDIA_AV.
     """
-    media = core.MEDIA_AUDIO
-
     def __init__(self, file):
         core.AVContainer.__init__(self)
         self.samplerate = 1
@@ -604,7 +602,6 @@ class Matroska(core.AVContainer):
             # FIXME: add more video codecs here
             track.codec = track.codec[2:]
 
-        self.media = core.MEDIA_AV
         track.id = len(self.video)
         self.video.append(track)
         return track

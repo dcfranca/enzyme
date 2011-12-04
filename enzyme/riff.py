@@ -96,7 +96,7 @@ class Riff(core.AVContainer):
 
         self._find_subtitles(file.name)
 
-        if not self.has_idx and self.media == core.MEDIA_AV:
+        if not self.has_idx and isinstance(self, core.AVContainer):
             log.debug('WARNING: avi has no index')
             self._set('corrupt', True)
 
@@ -534,7 +534,6 @@ class Riff(core.AVContainer):
             return False
         elif name == 'fmt ' and size <= 50:
             # This is a wav file.
-            self.media = core.MEDIA_AUDIO
             data = file.read(size)
             fmt = struct.unpack("<HHLLHH", data[:16])
             self._set('codec', hex(fmt[0]))

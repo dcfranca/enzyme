@@ -35,7 +35,7 @@ EXTENSION_DEVICE = 'device'
 EXTENSION_DIRECTORY = 'directory'
 EXTENSION_STREAM = 'stream'
 MEDIACORE = ['title', 'caption', 'comment', 'size', 'type', 'subtype', 'timestamp',
-             'keywords', 'country', 'language', 'langcode', 'url', 'media', 'artist',
+             'keywords', 'country', 'language', 'langcode', 'url', 'artist',
              'mime', 'datetime', 'tags', 'hash']
 AUDIOCORE = ['channels', 'samplerate', 'length', 'encoder', 'codec', 'format',
              'samplebits', 'bitrate', 'fourcc', 'trackno', 'id', 'userdate',
@@ -48,11 +48,6 @@ AVCORE = ['length', 'encoder', 'trackno', 'trackof', 'copyright', 'product',
           'genre', 'writer', 'producer', 'studio', 'rating', 'actors', 'thumbnail',
           'delay', 'image', 'video', 'audio', 'subtitles', 'chapters', 'software',
           'summary', 'synopsis', 'season', 'episode', 'series']
-MEDIA_AUDIO = 'MEDIA_AUDIO'
-MEDIA_VIDEO = 'MEDIA_VIDEO'
-MEDIA_AV = 'MEDIA_AV'
-MEDIA_SUBTITLE = 'MEDIA_SUBTITLE'
-MEDIA_CHAPTER = 'MEDIA_CHAPTER'
 
 # get logging object
 log = logging.getLogger(__name__)
@@ -382,7 +377,6 @@ class AudioStream(Media):
     Audio Tracks in a Multiplexed Container.
     """
     _keys = Media._keys + AUDIOCORE
-    media = MEDIA_AUDIO
 
 
 class Music(AudioStream):
@@ -410,7 +404,6 @@ class VideoStream(Media):
     Video Tracks in a Multiplexed Container.
     """
     _keys = Media._keys + VIDEOCORE
-    media = MEDIA_VIDEO
 
 
 class Chapter(Media):
@@ -418,7 +411,6 @@ class Chapter(Media):
     Chapter in a Multiplexed Container.
     """
     _keys = ['enabled', 'name', 'pos', 'id']
-    media = MEDIA_CHAPTER
 
     def __init__(self, name=None, pos=0):
         Media.__init__(self)
@@ -433,7 +425,6 @@ class Subtitle(Media):
     """
     _keys = ['enabled', 'default', 'langcode', 'language', 'trackno', 'title',
              'id', 'codec']
-    media = MEDIA_SUBTITLE
 
     def __init__(self, language=None):
         Media.__init__(self)
@@ -446,7 +437,6 @@ class AVContainer(Media):
     all media, that contain more than one stream.
     """
     _keys = Media._keys + AVCORE
-    media = MEDIA_AV
 
     def __init__(self):
         Media.__init__(self)
