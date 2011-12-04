@@ -421,7 +421,6 @@ class FLVTestCase(unittest.TestCase):
         self.p1 = enzyme.parse(os.path.join(mp4_test_path, u'20051210-w50s.flv'))
 
     def test_type_mime_media(self):
-        print self.p1
         self.assertTrue(self.p1.type == 'Flash Video')
         self.assertTrue(self.p1.mime == 'video/flv')
 
