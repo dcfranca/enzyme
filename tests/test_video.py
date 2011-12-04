@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
 # enzyme - Video metadata parser
 # Copyright (C) 2011 Antoine Bertin <diaoulael@gmail.com>
 #

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
 # enzyme - Video metadata parser
 # Copyright (c) 2011 Antoine Bertin <diaoulael@gmail.com>
 #
@@ -27,8 +26,8 @@ setup(name=infos.__title__,
     version=infos.__version__,
     license=infos.__license__,
     description=infos.__description__,
-    long_description=open('README.md').read() + '\n\n' +
-                     open('NEWS.md').read(),
+    long_description=open('README').read() + '\n\n' +
+                     open('NEWS').read(),
     classifiers=['Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
         'Intended Audience :: Developers',
@@ -41,5 +40,4 @@ setup(name=infos.__title__,
     author=infos.__author__,
     author_email=infos.__email__,
     url='https://github.com/Diaoul/enzyme',
-    packages=['enzyme'],
-    py_modules=['enzyme'])
+    packages=['enzyme'])
