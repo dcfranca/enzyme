@@ -49,7 +49,7 @@ class RealVideo(core.AVContainer):
             raise ParseError()
 
         file_version, num_headers = struct.unpack('>II', file.read(8))
-        log.debug("size: %d, ver: %d, headers: %d" % \
+        log.debug(u'size: %d, ver: %d, headers: %d' % \
                   (object_size, file_version,num_headers))
         for i in range(0,num_headers):
             try:
@@ -60,7 +60,7 @@ class RealVideo(core.AVContainer):
                 break
 
             if object_id == 'DATA' and oi[0] != 'INDX':
-                log.debug('INDX chunk expected after DATA but not found -- file corrupt')
+                log.debug(u'INDX chunk expected after DATA but not found -- file corrupt')
                 break
 
             (object_id,object_size,object_version) = oi
@@ -69,17 +69,17 @@ class RealVideo(core.AVContainer):
                 file.seek(object_size - 10, 1)
             else:
                 self._read_header(object_id, file.read(object_size-10))
-            log.debug("%s [%d]" % (object_id,object_size-10))
+            log.debug(u'%r [%d]' % (object_id,object_size-10))
         # Read all the following headers
 
 
     def _read_header(self,object_id,s):
         if object_id == 'PROP':
             prop = struct.unpack('>9IHH', s)
-            log.debug(prop)
+            log.debug(u'PROP: %r' % prop)
         if object_id == 'MDPR':
             mdpr = struct.unpack('>H7I', s[:30])
-            log.debug(mdpr)
+            log.debug(u'MDPR: %r' % mdpr)
             self.length = mdpr[7]/1000.0
             (stream_name_size,) = struct.unpack('>B', s[30:31])
             stream_name = s[31:31+stream_name_size]
@@ -101,7 +101,7 @@ class RealVideo(core.AVContainer):
                 vi.bitrate = mdpr[2]
                 self.video.append(vi)
             else:
-                log.debug("Unknown: %s" % mime)
+                log.debug(u'Unknown: %r' % mime)
         if object_id == 'CONT':
             pos = 0
             (title_len,) = struct.unpack('>H', s[pos:pos+2])

@@ -44,7 +44,7 @@ def resolve(code):
         if code in spec[:-1]:
             return code, spec[-1]
 
-    return code, u'Unknown (%s)' % code
+    return code, u'Unknown (%r)' % code
 
 
 # Parsed from http://www.loc.gov/standards/iso639-2/ISO-639-2_utf-8.txt

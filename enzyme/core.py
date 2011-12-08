@@ -139,6 +139,7 @@ class Media(object):
                 result += '|    ' + re.sub(r'\n(.)', r'\n|    \1', unicode(item))
 
         # print tables
+        #FIXME: WTH?
         if log.level >= 10:
             for name, table in self.tables.items():
                 result += '+-- Table %s\n' % str(name)
