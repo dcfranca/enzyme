@@ -20,15 +20,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-__all__ = ['Parser']
-
 from datetime import datetime
-from exceptions import *
+from enzyme.exceptions import ParseError
 from struct import unpack
 import core
 import logging
 import re
+
+__all__ = ['Parser']
+
 
 # get logging object
 log = logging.getLogger(__name__)
@@ -247,7 +247,7 @@ class EbmlEntity:
         # if the data size is 8 or less, it could be a numeric value
         self.value = 0
         if self.entity_len <= 8:
-            for pos, shift in zip(range(self.entity_len), range((self.entity_len-1)*8, -1, -8)):
+            for pos, shift in zip(range(self.entity_len), range((self.entity_len - 1) * 8, -1, -8)):
                 self.value |= ord(self.entity_data[pos]) << shift
 
 
@@ -271,19 +271,19 @@ class EbmlEntity:
             if len(inbuf) < 2:
                 return 0
             self.id_len = 2
-            self.entity_id = ord(inbuf[0])<<8 | ord(inbuf[1])
+            self.entity_id = ord(inbuf[0]) << 8 | ord(inbuf[1])
         elif first & 0x20:
             if len(inbuf) < 3:
                 return 0
             self.id_len = 3
-            self.entity_id = (ord(inbuf[0])<<16) | (ord(inbuf[1])<<8) | \
+            self.entity_id = (ord(inbuf[0]) << 16) | (ord(inbuf[1]) << 8) | \
                              (ord(inbuf[2]))
         elif first & 0x10:
             if len(inbuf) < 4:
                 return 0
             self.id_len = 4
-            self.entity_id = (ord(inbuf[0])<<24) | (ord(inbuf[1])<<16) | \
-                             (ord(inbuf[2])<<8) | (ord(inbuf[3]))
+            self.entity_id = (ord(inbuf[0]) << 24) | (ord(inbuf[1]) << 16) | \
+                             (ord(inbuf[2]) << 8) | (ord(inbuf[3]))
         self.entity_str = inbuf[0:self.id_len]
 
 
@@ -381,7 +381,7 @@ class Matroska(core.AVContainer):
         if header.get_id() != MATROSKA_HEADER_ID:
             raise ParseError()
 
-        log.debug(u'HEADER ID found %08X' % header.get_id() )
+        log.debug(u'HEADER ID found %08X' % header.get_id())
         self.mime = 'video/x-matroska'
         self.type = 'Matroska'
         self.has_idx = False
@@ -423,7 +423,7 @@ class Matroska(core.AVContainer):
                 elif ielem_id == MATROSKA_TITLE_ID:
                     self.title = ielem.get_utf8()
                 elif ielem_id == MATROSKA_DATE_UTC_ID:
-                    timestamp = unpack('!q', ielem.get_data())[0] / 10.0**9
+                    timestamp = unpack('!q', ielem.get_data())[0] / 10.0 ** 9
                     # Date is offset 2001-01-01 00:00:00 (timestamp 978307200.0)
                     self.timestamp = int(timestamp + 978307200)
 
@@ -704,7 +704,7 @@ class Matroska(core.AVContainer):
 
         # Right now we only support attachments that could be cover images.
         # Make a guess to see if this attachment is a cover image.
-        if mimetype.startswith("image/") and u"cover" in (name+desc).lower() and data:
+        if mimetype.startswith("image/") and u"cover" in (name + desc).lower() and data:
             self.thumbnail = data
 
         log.debug(u'Attachment %r found' % name)

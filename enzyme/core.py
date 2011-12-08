@@ -25,7 +25,6 @@ import re
 import logging
 import fourcc
 import language
-from exceptions import *
 from strutils import str_to_unicode, unicode_to_str
 
 UNPRINTABLE_KEYS = ['thumbnail', 'url', 'codec_private']
@@ -148,7 +147,7 @@ class Media(object):
                         value = unicode(value)
                         if len(value) > 50:
                             value = u'<unprintable data, size=%d>' % len(value)
-                    except (UnicodeDecodeError, TypeError), e:
+                    except (UnicodeDecodeError, TypeError):
                         try:
                             value = u'<unprintable data, size=%d>' % len(value)
                         except AttributeError:

@@ -24,7 +24,7 @@ __all__ = ['Parser']
 
 import struct
 import logging
-from exceptions import *
+from exceptions import ParseError
 import core
 
 # http://www.pcisys.net/~melanson/codecs/rmff.htm
@@ -34,13 +34,13 @@ import core
 log = logging.getLogger(__name__)
 
 class RealVideo(core.AVContainer):
-    def __init__(self,file):
+    def __init__(self, file):
         core.AVContainer.__init__(self)
         self.mime = 'video/real'
         self.type = 'Real Video'
         h = file.read(10)
         try:
-            (object_id,object_size,object_version) = struct.unpack('>4sIH',h)
+            (object_id, object_size, object_version) = struct.unpack('>4sIH', h)
         except struct.error:
             # EOF.
             raise ParseError()
@@ -50,10 +50,10 @@ class RealVideo(core.AVContainer):
 
         file_version, num_headers = struct.unpack('>II', file.read(8))
         log.debug(u'size: %d, ver: %d, headers: %d' % \
-                  (object_size, file_version,num_headers))
-        for i in range(0,num_headers):
+                  (object_size, file_version, num_headers))
+        for _ in range(0, num_headers):
             try:
-                oi = struct.unpack('>4sIH',file.read(10))
+                oi = struct.unpack('>4sIH', file.read(10))
             except (struct.error, IOError):
                 # Header data we expected wasn't there.  File may be
                 # only partially complete.
@@ -63,33 +63,33 @@ class RealVideo(core.AVContainer):
                 log.debug(u'INDX chunk expected after DATA but not found -- file corrupt')
                 break
 
-            (object_id,object_size,object_version) = oi
+            (object_id, object_size, object_version) = oi
             if object_id == 'DATA':
                 # Seek over the data chunk rather than reading it in.
                 file.seek(object_size - 10, 1)
             else:
-                self._read_header(object_id, file.read(object_size-10))
-            log.debug(u'%r [%d]' % (object_id,object_size-10))
+                self._read_header(object_id, file.read(object_size - 10))
+            log.debug(u'%r [%d]' % (object_id, object_size - 10))
         # Read all the following headers
 
 
-    def _read_header(self,object_id,s):
+    def _read_header(self, object_id, s):
         if object_id == 'PROP':
             prop = struct.unpack('>9IHH', s)
             log.debug(u'PROP: %r' % prop)
         if object_id == 'MDPR':
             mdpr = struct.unpack('>H7I', s[:30])
             log.debug(u'MDPR: %r' % mdpr)
-            self.length = mdpr[7]/1000.0
+            self.length = mdpr[7] / 1000.0
             (stream_name_size,) = struct.unpack('>B', s[30:31])
-            stream_name = s[31:31+stream_name_size]
-            pos = 31+stream_name_size
-            (mime_type_size,) = struct.unpack('>B', s[pos:pos+1])
-            mime = s[pos+1:pos+1+mime_type_size]
-            pos += mime_type_size+1
-            (type_specific_len,) = struct.unpack('>I', s[pos:pos+4])
-            type_specific = s[pos+4:pos+4+type_specific_len]
-            pos += 4+type_specific_len
+            stream_name = s[31:31 + stream_name_size]
+            pos = 31 + stream_name_size
+            (mime_type_size,) = struct.unpack('>B', s[pos:pos + 1])
+            mime = s[pos + 1:pos + 1 + mime_type_size]
+            pos += mime_type_size + 1
+            (type_specific_len,) = struct.unpack('>I', s[pos:pos + 4])
+            type_specific = s[pos + 4:pos + 4 + type_specific_len]
+            pos += 4 + type_specific_len
             if mime[:5] == 'audio':
                 ai = core.AudioStream()
                 ai.id = mdpr[0]
@@ -104,17 +104,17 @@ class RealVideo(core.AVContainer):
                 log.debug(u'Unknown: %r' % mime)
         if object_id == 'CONT':
             pos = 0
-            (title_len,) = struct.unpack('>H', s[pos:pos+2])
-            self.title = s[2:title_len+2]
-            pos += title_len+2
-            (author_len,) = struct.unpack('>H', s[pos:pos+2])
-            self.artist = s[pos+2:pos+author_len+2]
-            pos += author_len+2
-            (copyright_len,) = struct.unpack('>H', s[pos:pos+2])
-            self.copyright = s[pos+2:pos+copyright_len+2]
-            pos += copyright_len+2
-            (comment_len,) = struct.unpack('>H', s[pos:pos+2])
-            self.comment = s[pos+2:pos+comment_len+2]
+            (title_len,) = struct.unpack('>H', s[pos:pos + 2])
+            self.title = s[2:title_len + 2]
+            pos += title_len + 2
+            (author_len,) = struct.unpack('>H', s[pos:pos + 2])
+            self.artist = s[pos + 2:pos + author_len + 2]
+            pos += author_len + 2
+            (copyright_len,) = struct.unpack('>H', s[pos:pos + 2])
+            self.copyright = s[pos + 2:pos + copyright_len + 2]
+            pos += copyright_len + 2
+            (comment_len,) = struct.unpack('>H', s[pos:pos + 2])
+            self.comment = s[pos + 2:pos + comment_len + 2]
 
 
 Parser = RealVideo

@@ -18,13 +18,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-__all__ = ['Parser']
-
-from exceptions import *
+from enzyme.exceptions import ParseError
 import core
 import logging
 import struct
+
+__all__ = ['Parser']
+
 
 # get logging object
 log = logging.getLogger(__name__)
@@ -44,7 +44,7 @@ FLV_AUDIO_CODECID = (0x0001, 0x0002, 0x0055, 0x0001)
 
 # video flags
 FLV_VIDEO_CODECID_MASK = 0x0f
-FLV_VIDEO_CODECID = ( 'FLV1', 'MSS1', 'VP60') # wild guess
+FLV_VIDEO_CODECID = ('FLV1', 'MSS1', 'VP60') # wild guess
 
 FLV_DATA_TYPE_NUMBER = 0x00
 FLV_DATA_TYPE_BOOL = 0x01
@@ -70,7 +70,7 @@ class FlashVideo(core.AVContainer):
     """
     table_mapping = { 'FLVINFO' : FLVINFO }
 
-    def __init__(self,file):
+    def __init__(self, file):
         core.AVContainer.__init__(self)
         self.mime = 'video/flv'
         self.type = 'Flash Video'
@@ -78,7 +78,7 @@ class FlashVideo(core.AVContainer):
         if len(data) < 13 or struct.unpack('>3sBBII', data)[0] != 'FLV':
             raise ParseError()
 
-        for i in range(10):
+        for _ in range(10):
             if self.audio and self.video:
                 break
             data = file.read(11)
@@ -157,16 +157,16 @@ class FlashVideo(core.AVContainer):
 
         if ord(data[0]) == FLV_DATA_TYPE_STRING:
             length = (ord(data[1]) << 8) + ord(data[2])
-            return length + 3, data[3:length+3]
+            return length + 3, data[3:length + 3]
 
         if ord(data[0]) == FLV_DATA_TYPE_ECMARRAY:
             init_length = len(data)
             num = struct.unpack('>I', data[1:5])[0]
             data = data[5:]
             result = {}
-            for i in range(num):
+            for _ in range(num):
                 length = (ord(data[0]) << 8) + ord(data[1])
-                key = data[2:length+2]
+                key = data[2:length + 2]
                 data = data[length + 2:]
                 length, value = self._parse_value(data)
                 if not length:

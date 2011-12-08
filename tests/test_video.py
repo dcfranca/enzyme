@@ -35,7 +35,7 @@ mp4_test_path = os.path.abspath('files')
 
 
 class MKVTestCase(unittest.TestCase):
-    tests = ['test_title', 'test_comment', 'test_type_mime_media', 'test_timestamp', 
+    tests = ['test_title', 'test_comment', 'test_type_mime_media', 'test_timestamp',
              'test_datetime', 'test_length', 'test_tags', 'test_video', 'test_audio', 'test_subtitles']
 
     def setUp(self):
@@ -310,7 +310,7 @@ class MKVTestCase(unittest.TestCase):
 
 
 class MP4TestCase(unittest.TestCase):
-    tests = ['test_type_mime_media', 'test_timestamp', 
+    tests = ['test_type_mime_media', 'test_timestamp',
              'test_length', 'test_video', 'test_audio']
 
     def setUp(self):
