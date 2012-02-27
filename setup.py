@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # enzyme - Video metadata parser
-# Copyright (c) 2011 Antoine Bertin <diaoulael@gmail.com>
+# Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
 #
 # This file is part of enzyme.
 #
@@ -16,20 +16,19 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-
-from enzyme import infos
+# along with enzyme.  If not, see <http://www.gnu.org/licenses/>.
 from setuptools import setup
+execfile('enzyme/infos.py')
 
-setup(name=infos.__title__,
-    version=infos.__version__,
-    license=infos.__license__,
-    description=infos.__description__,
-    long_description=open('README').read() + '\n\n' +
-                     open('NEWS').read(),
+
+setup(name='enzyme',
+    version=__version__,
+    license='GPLv3',
+    description='Video metadata parser',
+    long_description=open('README.rst').read() + '\n\n' +
+                     open('NEWS.rst').read(),
     classifiers=['Development Status :: 4 - Beta',
-        'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.6',
@@ -37,7 +36,11 @@ setup(name=infos.__title__,
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Multimedia :: Video'],
     keywords='video parse metadata library',
-    author=infos.__author__,
-    author_email=infos.__email__,
+    author='Antoine Bertin',
+    author_email='diaoulael@gmail.com',
     url='https://github.com/Diaoul/enzyme',
-    packages=['enzyme'])
+    packages=['enzyme'],
+    include_package_data=True,
+    setup_requires=['setuptools_git'],
+    exclude_package_data={'': ['.gitignore']},
+    tests_require=['requests'])

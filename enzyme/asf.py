@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # enzyme - Video metadata parser
-# Copyright (C) 2011 Antoine Bertin <diaoulael@gmail.com>
-# Copyright (C) 2003-2006 Thomas Schueppel <stain@acm.org>
-# Copyright (C) 2003-2006 Dirk Meyer <dischi@freevo.org>
+# Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
+# Copyright 2003-2006 Thomas Schueppel <stain@acm.org>
+# Copyright 2003-2006 Dirk Meyer <dischi@freevo.org>
 #
 # This file is part of enzyme.
 #
@@ -17,13 +17,13 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+# along with enzyme.  If not, see <http://www.gnu.org/licenses/>.
 from enzyme.exceptions import ParseError
 import core
 import logging
 import string
 import struct
+
 
 __all__ = ['Parser']
 
@@ -92,8 +92,7 @@ GUIDS = {
     'ASF_Web_Stream_Format' : _guid('DA1E6B13-8359-4050-B398-388E965BF00C'),
 
     'ASF_No_Error_Correction' : _guid('20FB5700-5B55-11CF-A8FD-00805F5C442B'),
-    'ASF_Audio_Spread' : _guid('BFC3CD50-618F-11CF-8BB2-00AA00B4E220'),
-    }
+    'ASF_Audio_Spread' : _guid('BFC3CD50-618F-11CF-8BB2-00AA00B4E220')}
 
 
 class Asf(core.AVContainer):

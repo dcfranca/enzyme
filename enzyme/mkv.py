@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # enzyme - Video metadata parser
-# Copyright (C) 2011 Antoine Bertin <diaoulael@gmail.com>
-# Copyright (C) 2003-2006 Thomas Schueppel <stain@acm.org>
-# Copyright (C) 2003-2006 Dirk Meyer <dischi@freevo.org>
-# Copyright (C) 2003-2006 Jason Tackaberry <tack@urandom.ca>
+# Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
+# Copyright 2003-2006 Thomas Schueppel <stain@acm.org>
+# Copyright 2003-2006 Dirk Meyer <dischi@freevo.org>
+# Copyright 2003-2006 Jason Tackaberry <tack@urandom.ca>
 #
 # This file is part of enzyme.
 #
@@ -18,8 +18,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+# along with enzyme.  If not, see <http://www.gnu.org/licenses/>.
 from datetime import datetime
 from enzyme.exceptions import ParseError
 from struct import unpack

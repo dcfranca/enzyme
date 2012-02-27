@@ -2,8 +2,8 @@ enzyme
 ======
 Python module to parse metadata in video files
 
-* [Project page](https://github.com/Diaoul/enzyme)
-* [Initial project by Freevo](http://doc.freevo.org/2.0/Kaa#head-919960011a3523a465d1cacc57f2f8e7b0e8ad00), full list of authors in the AUTHORS file
+* `Project page <https://github.com/Diaoul/enzyme>`_
+* `Initial project by Freevo <http://doc.freevo.org/2.0/Kaa#head-919960011a3523a465d1cacc57f2f8e7b0e8ad00>`_, full list of authors in the AUTHORS file
 
 Usage
 -----
@@ -324,4 +324,3 @@ To see what data has been parsed, you can print the object:
     |    |       name: 02:09:47.405
     |    |        pos: 7787.405
     |    |         id: 34
-
