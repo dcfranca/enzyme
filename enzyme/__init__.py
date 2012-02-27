@@ -31,7 +31,8 @@ PARSERS = [('asf', ['video/asf'], ['asf', 'wmv', 'wma']),
            ('mpeg', ['video/mpeg'], ['mpeg', 'mpg', 'mp4', 'ts']),
            ('ogm', ['application/ogg'], ['ogm', 'ogg', 'ogv']),
            ('real', ['video/real'], ['rm', 'ra', 'ram']),
-           ('riff', ['video/avi'], ['wav', 'avi'])]
+           ('riff', ['video/avi'], ['wav', 'avi'])
+]
 
 
 def parse(path):
