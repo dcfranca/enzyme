@@ -25,9 +25,6 @@ import language
 from strutils import str_to_unicode, unicode_to_str
 
 UNPRINTABLE_KEYS = ['thumbnail', 'url', 'codec_private']
-EXTENSION_DEVICE = 'device'
-EXTENSION_DIRECTORY = 'directory'
-EXTENSION_STREAM = 'stream'
 MEDIACORE = ['title', 'caption', 'comment', 'size', 'type', 'subtype', 'timestamp',
              'keywords', 'country', 'language', 'langcode', 'url', 'artist',
              'mime', 'datetime', 'tags', 'hash']
@@ -48,8 +45,6 @@ log = logging.getLogger(__name__)
 
 
 class Media(object):
-    media = None
-
     """
     Media is the base class to all Media Metadata Containers. It defines
     the basic structures that handle metadata. Media and its derivates
@@ -57,6 +52,7 @@ class Media(object):
     Specific derivates contain additional keys to the dublin core set that is
     defined in Media.
     """
+    media = None
     _keys = MEDIACORE
     table_mapping = {}
 
@@ -136,20 +132,20 @@ class Media(object):
 
         # print tables
         #FIXME: WTH?
-        if log.level >= 10:
-            for name, table in self.tables.items():
-                result += '+-- Table %s\n' % str(name)
-                for key, value in table.items():
-                    try:
-                        value = unicode(value)
-                        if len(value) > 50:
-                            value = u'<unprintable data, size=%d>' % len(value)
-                    except (UnicodeDecodeError, TypeError):
-                        try:
-                            value = u'<unprintable data, size=%d>' % len(value)
-                        except AttributeError:
-                            value = u'<unprintable data>'
-                    result += u'|    | %s: %s\n' % (unicode(key), value)
+#        if log.level >= 10:
+#            for name, table in self.tables.items():
+#                result += '+-- Table %s\n' % str(name)
+#                for key, value in table.items():
+#                    try:
+#                        value = unicode(value)
+#                        if len(value) > 50:
+#                            value = u'<unprintable data, size=%d>' % len(value)
+#                    except (UnicodeDecodeError, TypeError):
+#                        try:
+#                            value = u'<unprintable data, size=%d>' % len(value)
+#                        except AttributeError:
+#                            value = u'<unprintable data>'
+#                    result += u'|    | %s: %s\n' % (unicode(key), value)
         return result
 
     def __str__(self):
