@@ -20,7 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with enzyme.  If not, see <http://www.gnu.org/licenses/>.
 from datetime import datetime
-from enzyme.exceptions import ParseError
+from exceptions import ParseError
 from struct import unpack
 import core
 import logging
