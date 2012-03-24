@@ -3,10 +3,11 @@ News
 
 0.2
 ---
-**release date:** not released yet
+**release date:** 2012-03-24
 * Add some documentation
 * Small code clean up
 * Improve setup.py
+* Make enzyme usable in place (even if not in sys.path)
 
 0.1
 ---
