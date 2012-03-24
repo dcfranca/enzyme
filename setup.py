@@ -17,16 +17,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with enzyme.  If not, see <http://www.gnu.org/licenses/>.
-from setuptools import setup
-execfile('enzyme/infos.py')
+import os.path
+from setuptools import setup, find_packages
 
 
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+execfile(os.path.join(os.path.dirname(__file__), 'enzyme', 'infos.py'))
 setup(name='enzyme',
     version=__version__,
     license='GPLv3',
     description='Video metadata parser',
-    long_description=open('README.rst').read() + '\n\n' +
-                     open('NEWS.rst').read(),
+    long_description=read('README.rst') + '\n\n' + read('NEWS.rst'),
     classifiers=['Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Intended Audience :: Developers',
@@ -39,7 +42,7 @@ setup(name='enzyme',
     author='Antoine Bertin',
     author_email='diaoulael@gmail.com',
     url='https://github.com/Diaoul/enzyme',
-    packages=['enzyme'],
+    packages=find_packages(),
     include_package_data=True,
     setup_requires=['setuptools_git'],
     exclude_package_data={'': ['.gitignore']},
