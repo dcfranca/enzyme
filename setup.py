@@ -43,7 +43,4 @@ setup(name='enzyme',
     author_email='diaoulael@gmail.com',
     url='https://github.com/Diaoul/enzyme',
     packages=find_packages(),
-    include_package_data=True,
-    setup_requires=['setuptools_git'],
-    exclude_package_data={'': ['.gitignore']},
     tests_require=['requests'])
