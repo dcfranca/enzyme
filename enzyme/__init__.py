@@ -35,7 +35,7 @@ PARSERS = [('asf', ['video/asf'], ['asf', 'wmv', 'wma']),
 ]
 
 
-def parse(video_file):
+def parse(video_file, url=None):
     """Parse metadata of the given video
 
     :param string path: path to the video file to parse
@@ -43,14 +43,15 @@ def parse(video_file):
     :rtype: :class:`~enzyme.core.AVContainer`
 
     """
-    f = None
+    f    = None
+    path = ''
 
     if isinstance(video_file, basestring):
         path = video_file
         if not os.path.isfile(video_file):
             raise ValueError('Invalid path')
-    elif isinstance(video_file, file):
-        path = file.name
+    elif hasattr(video_file, 'read'):
+        path = url
         f = video_file
 
     extension = os.path.splitext(path)[1][1:]
